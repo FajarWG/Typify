@@ -33,7 +33,7 @@ const Page = () => {
                 size="md"
                 className="bg-primary text-white cursor-pointer w-full"
               >
-                <Link href="/belajar">Lanjutkan Belajar</Link>
+                <Link href="/dashboard">Dashboard</Link>
               </Button>
             </SignedIn>
             <SignedOut>
