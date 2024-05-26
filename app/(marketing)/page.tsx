@@ -1,3 +1,6 @@
+"use client";
+
+import { getUser } from "@/utils/getUser";
 import {
   ClerkLoaded,
   ClerkLoading,
@@ -6,14 +9,33 @@ import {
   SignInButton,
   SignUpButton,
   UserButton,
+  useSession,
 } from "@clerk/nextjs";
 import { Button } from "@nextui-org/react";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useTransition } from "react";
 
 const Page = () => {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const onClick = () => {
+    if (isPending) return;
+
+    startTransition(() => {
+      getUser()
+        .then(() => {
+          router.push("/belajar");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  };
+
   return (
     <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-row items-center justify-center p-4 gap-4">
       <div className="relative w-[424px] h-[424px] mb-0">
@@ -32,8 +54,9 @@ const Page = () => {
               <Button
                 size="md"
                 className="bg-primary text-white cursor-pointer w-full"
+                onClick={onClick}
               >
-                <Link href="/dashboard">Dashboard</Link>
+                Dashboard
               </Button>
             </SignedIn>
             <SignedOut>

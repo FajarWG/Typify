@@ -4,8 +4,8 @@
 
 import React, { useState } from "react";
 import { Card, Button, CardBody } from "@nextui-org/react";
-import { words } from "./function/words";
-import Generator from "./function/generator";
+import { words } from "@/components/organisims/learn/function/words";
+import Generator from "@/components/organisims/learn/function/generator";
 
 const LessonSelector: React.FC = () => {
   const [selectedLesson, setSelectedLesson] = useState<

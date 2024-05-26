@@ -11,7 +11,6 @@ const MarketingLayout = ({ children }: Props) => {
   return (
     <div className="flex w-full">
       <Sidebar>
-        <SidebarItem text="Dashboard" icon={<Home />} link="/dashboard" />
         <SidebarItem
           text="Mengetik 10 Jari"
           icon={<GraduationCap size={60} />}

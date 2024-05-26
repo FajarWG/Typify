@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // atau sesuai dengan database yang Anda gunakan
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String             @id
+  username       String
+  userImageSrc   String 
+  hearts         Int              @default(20)
+  level_user     Int            @default(1)
+  exp_user       Int          @default(0)
+  explores       Explore[]
+  detailContents DetailContent[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  Leaderboard    Leaderboard[]
+  HistoryExpUp   HistoryExpUp[]
+}
+
+model Explore {
+  id           Int      @id @default(autoincrement())
+  title        String
+  levelExplore Int
+  exp          Int
+  content      Json
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model DetailContent {
+  id           Int      @id @default(autoincrement())
+  titleContent String
+  imgSrc       String
+  description  String
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Leaderboard {
+  id               Int      @id @default(autoincrement())
+  userId           String
+  totalXp          Int
+  speedTypingSpeed Int
+  user             User     @relation(fields: [userId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model HistoryExpUp {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  source    String
+  expUp     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
