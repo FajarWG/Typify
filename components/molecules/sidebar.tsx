@@ -10,13 +10,13 @@ export default function Sidebar({ children }: any) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <aside className="h-screen">
+    <aside className="h-screen sticky top-0 z-50 border-r-2 border-primary">
       <nav
         className={`h-full flex flex-col bg-white border-r shadow-sm ${
           expanded ? "w-[256px]" : "w-[70px]"
         } `}
       >
-        <div className="p-4 pb-2 flex justify-between items-center">
+        <div className="p-6  flex justify-between items-center">
           <Image
             src="/vercel.svg"
             className={`overflow-hidden transition-all `}
@@ -41,7 +41,7 @@ export function SidebarItem({ icon, text, active, alert, link }: any) {
     <Link href={link}>
       <li
         className={`
-        relative flex items-center py-2 px-3 my-1
+        relative flex items-center py-2 px-3 my-1 mt-4
         font-medium rounded-md cursor-pointer
         transition-colors group 
         ${
@@ -52,7 +52,7 @@ export function SidebarItem({ icon, text, active, alert, link }: any) {
     `}
       >
         {icon}
-        <span className={`overflow-hidden transition-all w-0`}>{text}</span>
+        <span className={`overflow-hidden transition-all w-0 h-0`}>{text}</span>
         {alert && (
           <div
             className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 top-2`}
@@ -61,7 +61,7 @@ export function SidebarItem({ icon, text, active, alert, link }: any) {
 
         <div
           className={`
-          absolute left-full rounded-md px-2 py-1 ml-6
+          absolute left-full rounded-md px-2 py-1 ml-6 text-nowrap
           bg-indigo-100 text-indigo-800 text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0

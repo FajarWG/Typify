@@ -4,6 +4,7 @@ import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { localization } from "./localization";
+import { BackgroundBeams } from "@/components/molecules/background";
 
 const inter = Inter({ subsets: ["latin"] });
 

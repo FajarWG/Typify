@@ -3,9 +3,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, Button, CardBody } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
 import { words } from "@/components/organisims/learn/function/words";
 import Generator from "@/components/organisims/learn/function/generator";
+import { HoverEffect } from "@/components/organisims/learn/selectCard";
 
 const LessonSelector: React.FC = () => {
   const [selectedLesson, setSelectedLesson] = useState<
@@ -19,30 +20,12 @@ const LessonSelector: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className=" justify-center align-middle">
-        <p>Pilih Pelajaran</p>
-      </div>
-      <div className="flex flex-row justify-center align-middle">
-        {Object.keys(words).map((lesson) => (
-          <div key={lesson}>
-            <Card>
-              <CardBody>
-                <p>{lesson}</p>
-                <Button
-                  onClick={() =>
-                    handleLessonSelect(lesson as keyof typeof words)
-                  }
-                >
-                  Pilih
-                </Button>
-              </CardBody>
-            </Card>
-          </div>
-        ))}
+    <>
+      <div className="flex flex-row justify-center flex-wrap gap-8">
+        <HoverEffect items={words} handleSelect={handleLessonSelect} />
       </div>
       {selectedLesson && generator && (
-        <div className="justify-center align-middle">
+        <div className="justify-center ">
           <div>
             <Card>
               <CardBody>
@@ -53,7 +36,7 @@ const LessonSelector: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

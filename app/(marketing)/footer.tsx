@@ -1,33 +1,37 @@
-import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+
+const footer = [
+  {
+    title: "Tentang",
+    url: "/tentang",
+  },
+  {
+    title: "Kolaborasi",
+    url: "/kolaborasi",
+  },
+  {
+    title: "Ketentuan",
+    url: "/ketentuan",
+  },
+  {
+    title: "Privasi",
+    url: "/privasi",
+  },
+];
 
 const Footer = () => {
   return (
-    <footer className="hidden lg:block h-20 w-full border-t-2 border-slate-200 p-2">
-      <div className="max-w-screen-lg flex h-full items-center justify-center gap-4 mx-auto">
-        <Image
-          src={
-            "https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg"
-          }
-          alt="Indonesia Flag"
-          width={50}
-          height={50}
-        />
-        <Image
-          src={"https://unikom.ac.id/img/logo_unikom_kuning.png"}
-          alt="Indonesia Flag"
-          width={50}
-          height={50}
-        />
-        <Image
-          src={
-            "https://disdikbud.banyuasinkab.go.id/wp-content/uploads/sites/269/2022/11/Logo-Tut-Wuri-Handayani-PNG-Warna.png"
-          }
-          alt="Indonesia Flag"
-          width={50}
-          height={50}
-        />
-      </div>
+    <footer className="flex flex-row flex-wrap justify-center items-center gap-2 w-full h-20  p-2 mt-4">
+      {footer.map((item, index) => (
+        <Link
+          href={item.url}
+          key={index}
+          className="text-primary font-bold text-lg cursor-pointer hover:text-secondary-500 transition-all duration-300 ease-in-out"
+        >
+          {item.title}
+        </Link>
+      ))}
     </footer>
   );
 };

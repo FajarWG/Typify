@@ -1,7 +1,7 @@
 "use client";
 import Sidebar, { SidebarItem } from "@/components/molecules/sidebar";
 import UserCard from "@/components/molecules/userCard";
-import { Earth, GraduationCap, Home, Timer } from "lucide-react";
+import { BarChart4, Earth, GraduationCap, Home, Timer } from "lucide-react";
 
 type Props = {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ const MarketingLayout = ({ children }: Props) => {
       <Sidebar>
         <SidebarItem
           text="Mengetik 10 Jari"
-          icon={<GraduationCap size={60} />}
+          icon={<GraduationCap />}
           link="/belajar"
         />
         <SidebarItem
@@ -25,6 +25,11 @@ const MarketingLayout = ({ children }: Props) => {
           text="Tes Kecepatan"
           icon={<Timer />}
           link="/tes-mengetik"
+        />
+        <SidebarItem
+          text="Leaderboard"
+          icon={<BarChart4 />}
+          link="/leaderboard"
         />
       </Sidebar>
       <main className="h-full w-full">{children}</main>
