@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import Counter from './counter';
+import Counter from "./counter";
 
 class ErrorStats {
   private currentStatsEl: HTMLSpanElement | null;
@@ -14,7 +13,10 @@ class ErrorStats {
   }
 
   // Update the DOM elements based on the current and average error statistics
-  private updateStatsDisplay(currentPercentage: string, averagePercentage: string) {
+  private updateStatsDisplay(
+    currentPercentage: string,
+    averagePercentage: string
+  ) {
     if (this.currentStatsEl) {
       this.currentStatsEl.textContent = currentPercentage;
     }
@@ -28,10 +30,10 @@ class ErrorStats {
     this.stats.push(percentage);
 
     const total = this.stats.reduce((acc, p) => acc + p, 0);
-    const averagePercentage = (total / this.stats.length).toFixed(2) + '%';
+    const averagePercentage = (total / this.stats.length).toFixed(2) + "%";
 
     if (this.averageStatsEl) {
-      this.updateStatsDisplay(percentage.toFixed(2) + '%', averagePercentage);
+      this.updateStatsDisplay(percentage.toFixed(2) + "%", averagePercentage);
     }
   }
 
@@ -42,12 +44,18 @@ class ErrorStats {
     this.updateAverage(percentage);
 
     if (this.currentStatsEl) {
-      this.updateStatsDisplay(percentage.toFixed(2) + '%', this.averageStatsEl?.textContent || '0.00%');
+      this.updateStatsDisplay(
+        percentage.toFixed(2) + "%",
+        this.averageStatsEl?.textContent || "0.00%"
+      );
     }
   }
 
   // Set the DOM elements references when the component mounts
-  public setDOMElements(currentStatsEl: HTMLSpanElement, averageStatsEl: HTMLSpanElement) {
+  public setDOMElements(
+    currentStatsEl: HTMLSpanElement,
+    averageStatsEl: HTMLSpanElement
+  ) {
     this.currentStatsEl = currentStatsEl;
     this.averageStatsEl = averageStatsEl;
   }

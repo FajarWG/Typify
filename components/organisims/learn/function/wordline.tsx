@@ -8,8 +8,14 @@ import Counter from "./counter";
 import Keyboard from "./keyboard";
 import { Button, useDisclosure } from "@nextui-org/react";
 import ModalStart from "../modalStart";
+import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
+import { words } from "./words";
 
-const Wordline: any = ({ mode }: any) => {
+const Wordline: any = ({ mode, dataGame }: any) => {
+  let id = useParams().id as any;
+  id = parseInt(id) + 1;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [letters, setLetters] = useState<string[]>([]);
@@ -19,11 +25,10 @@ const Wordline: any = ({ mode }: any) => {
 
   const errorStats = useRef<ErrorStats>(new ErrorStats());
   const errorCounter = useRef(new Counter());
-  const generator = new Generator({
-    lesson: "Pelajaran1",
-    interval: 60000,
-    number: 8,
-  });
+  // const generator = new Generator({
+  //   lesson: `Pelajaran${id}` as any,
+  // });
+
   const timeStart = useRef<number>(0);
 
   const [keyboard, setKeyboard] = useState<any>();
@@ -48,20 +53,8 @@ const Wordline: any = ({ mode }: any) => {
     if (inputlineRef.current) {
       inputlineRef.current.value = "";
     }
-    bindEvents();
-    fill(true);
-    return () => {
-      document.removeEventListener("click", handleDocumentClick);
-    };
+    fill();
   }, []);
-
-  const bindEvents = () => {
-    document.addEventListener("click", handleDocumentClick);
-  };
-
-  const handleDocumentClick = () => {
-    // Handle document click
-  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (
@@ -122,7 +115,10 @@ const Wordline: any = ({ mode }: any) => {
       }
     }, 200);
 
-    errorCounter.current.up();
+    dataGame.setDataGame({
+      ...dataGame.dataGame,
+      error: dataGame.dataGame.error + 1,
+    });
 
     return false;
   };
@@ -166,24 +162,13 @@ const Wordline: any = ({ mode }: any) => {
     return output;
   };
 
-  const fill = (isInit = false) => {
-    let newLetters: any;
-    if (mode === "beginner") {
-      newLetters = generator.getOne();
-    } else {
-      newLetters = generator.getWords();
-    }
+  const fill = () => {
+    // let newLetters: any = generator.getWords();
+    const learnWords = words[`Pelajaran${id}`] as any;
+
+    let newLetters = learnWords[0];
+
     setLetters(newLetters);
-
-    if (!isInit) {
-      errorStats.current.update(errorCounter.current, newLetters);
-
-      let timeEnd = Date.now();
-
-      speedStats.update(timeEnd - timeStart.current, newLetters);
-
-      errorCounter.current.reset();
-    }
 
     let markup = "";
     for (let letter of newLetters) {
@@ -217,40 +202,17 @@ const Wordline: any = ({ mode }: any) => {
   return (
     <>
       <div className="wordline-component text-center">
+        <div
+          ref={wordlineRef}
+          className="wordline text-start font-bold text-xl"
+        ></div>
         <input
           ref={inputlineRef}
-          className="inputline"
+          className="inputline rounded-md font-bold mb-4"
           onKeyPress={handleKeyPress}
           onKeyDown={handleKeyDown}
           autoFocus
         />
-        <div ref={wordlineRef} className="wordline text-start"></div>
-      </div>
-      <div className="flex justify-between w-full px-20 mt-4">
-        <Button
-          color="secondary"
-          onClick={() => {
-            fill();
-            highlightKeyTarget();
-            if (inputlineRef.current) {
-              inputlineRef.current.value = "";
-            }
-          }}
-        >
-          Pelajaran Sebelumnya
-        </Button>
-        <Button
-          color={"primary"}
-          onClick={() => {
-            fill();
-            highlightKeyTarget();
-            if (inputlineRef.current) {
-              inputlineRef.current.value = "";
-            }
-          }}
-        >
-          Pelajaran Selanjutnya
-        </Button>
       </div>
       <ModalStart
         hook={{

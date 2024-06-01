@@ -2,12 +2,15 @@
 import Sidebar, { SidebarItem } from "@/components/molecules/sidebar";
 import UserCard from "@/components/molecules/userCard";
 import { BarChart4, Earth, GraduationCap, Home, Timer } from "lucide-react";
+import { useParams } from "next/navigation";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const MarketingLayout = ({ children }: Props) => {
+  const params = useParams();
+
   return (
     <div className="flex w-full">
       <Sidebar>
@@ -33,7 +36,7 @@ const MarketingLayout = ({ children }: Props) => {
         />
       </Sidebar>
       <main className="h-full w-full">{children}</main>
-      <UserCard />
+      {!params.id && <UserCard />}
     </div>
   );
 };

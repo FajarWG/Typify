@@ -3,17 +3,18 @@ import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const HoverEffect = ({
   items,
   className,
-  handleSelect,
 }: {
   items: any;
   className?: string;
-  handleSelect: (lesson: any) => void;
 }) => {
+  const router = useRouter();
+
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -27,7 +28,8 @@ export const HoverEffect = ({
         <div
           key={lesson}
           className="relative group  block p-2 h-full w-full"
-          onClick={() => handleSelect(lesson as keyof typeof items)}
+          // onClick={() => handleSelect(lesson as keyof typeof items)}
+          onClick={() => router.push(`/belajar/${idx}`)}
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
