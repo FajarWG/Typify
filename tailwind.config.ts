@@ -23,12 +23,17 @@ const config: Config = {
       animation: {
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        idle: "idle 1s infinite",
       },
       keyframes: {
         scroll: {
           to: {
             transform: "translate(calc(-50% - 0.5rem))",
           },
+        },
+        idle: {
+          "0%, 100%": { opacity: "0.2" },
+          "50%": { opacity: "0.9" },
         },
       },
     },
