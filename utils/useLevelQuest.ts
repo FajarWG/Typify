@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-export const useHistory = () => {
-  const [history, setHistory] = useState([]);
+export const useLevelQuest = () => {
+  const [level, setLevel] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchHistory = async () => {
+    const featchData = async () => {
       try {
-        const response = await fetch("/api/typing-test", {
+        const response = await fetch("/api/data-level", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export const useHistory = () => {
         });
 
         if (!response.ok) {
-          throw new Error("Failed to fetch typing test history");
+          throw new Error("Failed to fetch typing test level");
         }
 
         const data = await response.json();
@@ -24,7 +24,7 @@ export const useHistory = () => {
           data.data = data.data.slice(0, 5);
         }
 
-        setHistory(data.data);
+        setLevel(data.data);
       } catch (error) {
         console.log("error");
       } finally {
@@ -32,8 +32,8 @@ export const useHistory = () => {
       }
     };
 
-    fetchHistory();
+    featchData();
   }, []);
 
-  return { history, loading };
+  return { level, loading };
 };

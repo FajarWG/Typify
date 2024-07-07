@@ -77,3 +77,10 @@ export async function POST() {
 
   return getResponse(null, "Success create data level", 200);
 }
+
+export async function GET() {
+  const level = await prisma.level.findMany();
+  const quest = await prisma.quest.findMany();
+
+  return getResponse({ level, quest }, "Success get data level", 200);
+}

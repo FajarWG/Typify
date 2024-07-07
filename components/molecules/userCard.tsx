@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Loading from "@/app/(main)/belajar/loading";
-import { getUser } from "@/utils/getUser";
+
 import { UserButton } from "@clerk/nextjs";
 import {
   AlarmClock,
@@ -11,8 +11,11 @@ import {
   Target,
   Zap,
 } from "lucide-react";
-import { Divider, Slider } from "@nextui-org/react";
+import { Divider, Progress, Skeleton, Slider } from "@nextui-org/react";
 import Link from "next/link";
+import { useLevelQuest } from "@/utils/useLevelQuest";
+
+import { useUser } from "@/utils/useUser";
 
 const footer = [
   {
@@ -34,79 +37,59 @@ const footer = [
 ];
 
 const UserCard = () => {
-  const [user, setUser] = React.useState<any>(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
-
-  const getData = async () => {
-    const data = await getUser();
-    console.log(data);
-    setUser(data);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const { users: user, loading }: any = useUser();
+  const { level, loading: loadingLevel }: any = useLevelQuest();
 
   return (
     <div className="flex flex-col sticky top-3 h-fit items-center gap-5 bg-white m-3 w-96 rounded-lg border-2 border-primary p-8">
       <div className="flex flex-col gap-2 w-full justify-center items-center">
-        <UserButton
-          afterSignOutUrl="/"
-          appearance={{
-            elements: {
-              userButtonAvatarBox: "w-16 h-16", // Custom width and height
-              userButtonPopoverCard: "bg-blue-100", // Custom background for the popover card
-              userButtonPopoverActionButton: "text-blue-600", // Custom text color for action buttons
-            },
-          }}
-        />
-
-        {loading ? (
-          <Loading />
-        ) : (
-          <span className="text-lg font-bold text-gray-700">
-            {user?.data.username}
-          </span>
-        )}
-
-        <div className="flex flex-col gap-2 w-full h-full max-w-md items-start justify-center">
-          <Slider
-            aria-label="Player progress"
-            label="100 Exp"
-            color="primary"
-            hideThumb={true}
-            defaultValue={20}
-            classNames={{
-              label: "text-default-500 font-bold text-small",
-              value: "text-default-500 font-bold text-small",
-            }}
-            className="max-w-md"
-          />
-          <div className="flex justify-between w-full">
-            <p className="text-default-500 font-medium text-small">Level 1</p>
-            <p className="text-default-500 font-medium text-small">Level 2</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-7">
-        {loading ? (
-          <Loading />
+        {loading || loadingLevel ? (
+          <>
+            <Skeleton className="w-16 h-16 rounded-full" />
+            <Skeleton className="w-32 h-5 rounded-md" />
+            <Skeleton className=" w-full h-20 rounded-md" />
+          </>
         ) : (
           <>
-            <div className="flex items-center gap-2">
-              <Sparkles size={20} className=" text-primary" />
-              <span className=" text-sm font-bold">{user.data.level_user}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Heart size={20} className=" text-red-500" />
-              <span className=" text-sm font-bold">{user.data.hearts}</span>
+            <UserButton
+              afterSignOutUrl="/"
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "w-16 h-16", // Custom width and height
+                  userButtonPopoverCard: "bg-blue-100", // Custom background for the popover card
+                  userButtonPopoverActionButton: "text-blue-600", // Custom text color for action buttons
+                },
+              }}
+            />
+
+            <span className="text-lg font-bold text-gray-700">
+              {user?.username}
+            </span>
+            <div className="flex flex-col gap-2 w-full h-full max-w-md items-start justify-center">
+              <Progress
+                label={`Exp Kamu`}
+                size="sm"
+                value={user?.exp_user}
+                maxValue={level?.level[user?.level_user + 1]?.expRequired}
+                color="warning"
+                showValueLabel={true}
+                valueLabel={user?.exp_user}
+                className="max-w-md"
+              />
+              <div className="flex justify-between w-full">
+                <p className="text-default-500 font-medium text-small">
+                  Level {user?.level_user}
+                </p>
+                <p className="text-default-500 font-medium text-small">
+                  Level {user?.level_user + 1}
+                </p>
+              </div>
             </div>
           </>
         )}
       </div>
-      <Divider />
-      <div className="flex flex-col gap-2 w-full">
+
+      {/* <div className="flex flex-col gap-2 w-full">
         <p className="text-default-500 font-bold text-lg">Misi Harian</p>
 
         <div className="flex flex-col gap-4 w-full">
@@ -175,7 +158,7 @@ const UserCard = () => {
             {item.title}
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

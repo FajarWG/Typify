@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-export const useHistory = () => {
-  const [history, setHistory] = useState([]);
+export const useUser = () => {
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch("/api/typing-test", {
+        const response = await fetch("/api/register", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const useHistory = () => {
           data.data = data.data.slice(0, 5);
         }
 
-        setHistory(data.data);
+        setUsers(data.data);
       } catch (error) {
         console.log("error");
       } finally {
@@ -35,5 +35,5 @@ export const useHistory = () => {
     fetchHistory();
   }, []);
 
-  return { history, loading };
+  return { users, loading };
 };
