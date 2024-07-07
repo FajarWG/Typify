@@ -1,8 +1,14 @@
 import Prisma from "@/libs/prisma";
 import getResponse from "@/utils/getResponse";
+import { currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+  const dataUser = await currentUser();
+  if (!dataUser) {
+    return NextResponse.redirect("/login");
+  }
+
   const leaderboard = await Prisma.historyTyping.findMany({
     select: {
       userId: true,
