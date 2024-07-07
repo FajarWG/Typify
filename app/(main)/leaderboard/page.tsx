@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Tabs, Tab, User } from "@nextui-org/react";
+import { Tabs, Tab, User, Skeleton } from "@nextui-org/react";
 import {
   Table,
   TableHeader,
@@ -42,10 +42,6 @@ const TypingTestHistoryComponent = () => {
     fetchHistory();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return <p>{error}</p>;
   }
@@ -60,30 +56,47 @@ const TypingTestHistoryComponent = () => {
           <TableColumn>Level</TableColumn>
         </TableHeader>
         <TableBody>
-          {history.map((item: any, index) => (
-            <TableRow key={index}>
-              <TableCell>{index + 1}</TableCell>
+          {loading ? (
+            <TableRow>
               <TableCell>
-                <User
-                  avatarProps={{
-                    radius: "lg",
-                    src: item.user.userImageSrc,
-                  }}
-                  description={item.user.username}
-                  name={item.user.username}
-                >
-                  {item.user.username}
-                </User>
+                <Skeleton className="h-8 w-full rounded-lg" />
               </TableCell>
-
-              <TableCell className="font-semibold">
-                {item.user.exp_user}
+              <TableCell>
+                <Skeleton className="h-8 w-full rounded-lg" />
               </TableCell>
-              <TableCell className="font-semibold">
-                {item.user.level_user}
+              <TableCell>
+                <Skeleton className="h-8 w-full rounded-lg" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-8 w-full rounded-lg" />
               </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            history.map((item: any, index) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{
+                      radius: "lg",
+                      src: item.user.userImageSrc,
+                    }}
+                    description={item.user.username}
+                    name={item.user.username}
+                  >
+                    {item.user.username}
+                  </User>
+                </TableCell>
+
+                <TableCell className="font-semibold">
+                  {item.user.exp_user}
+                </TableCell>
+                <TableCell className="font-semibold">
+                  {item.user.level_user}
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     );
@@ -98,26 +111,45 @@ const TypingTestHistoryComponent = () => {
           <TableColumn>Akurasi</TableColumn>
         </TableHeader>
         <TableBody>
-          {history.map((item: any, index) => (
-            <TableRow key={index}>
-              <TableCell>{index + 1}</TableCell>
+          {loading ? (
+            <TableRow>
               <TableCell>
-                <User
-                  avatarProps={{
-                    radius: "lg",
-                    src: item.user.userImageSrc,
-                  }}
-                  description={item.user.username}
-                  name={item.user.username}
-                >
-                  {item.user.username}
-                </User>
+                <Skeleton className="h-8 w-full rounded-lg" />
               </TableCell>
-
-              <TableCell className="font-semibold">{item.wpm}</TableCell>
-              <TableCell className="font-semibold">{item.accuracy} %</TableCell>
+              <TableCell>
+                <Skeleton className="h-8 w-full rounded-lg" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-8 w-full rounded-lg" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-8 w-full rounded-lg" />
+              </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            history.map((item: any, index) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{
+                      radius: "lg",
+                      src: item.user.userImageSrc,
+                    }}
+                    description={item.user.username}
+                    name={item.user.username}
+                  >
+                    {item.user.username}
+                  </User>
+                </TableCell>
+
+                <TableCell className="font-semibold">{item.wpm}</TableCell>
+                <TableCell className="font-semibold">
+                  {item.accuracy} %
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     );
