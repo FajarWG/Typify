@@ -1,3 +1,5 @@
+import getResponse from "@/utils/getResponse";
+
 export async function POST() {
   //level
   await prisma.level.createMany({
@@ -73,5 +75,5 @@ export async function POST() {
     ],
   });
 
-  return { message: "POST method" };
+  return getResponse(null, "Success create data level", 200);
 }

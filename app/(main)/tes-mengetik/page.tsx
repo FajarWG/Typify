@@ -147,6 +147,7 @@ const Home = () => {
           correct: correctKeystroke,
           error: wrongKeystroke,
           time: 30,
+          questTitle: "Tes Mengetik Harian",
         }),
       });
 
