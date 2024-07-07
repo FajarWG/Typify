@@ -1,12 +1,13 @@
 import Prisma from "@/libs/prisma";
 import getResponse from "@/utils/getResponse";
+import { updateExpLevel } from "@/utils/updateExpLevel";
 import { currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const dataUser = await currentUser();
   const body = await req.json();
-  const { wpm, accuracy, correct, error, time } = body;
+  const { wpm, accuracy, correct, error, time, questTitle } = body;
 
   if (!dataUser) {
     return getResponse(null, "Unauthorized", 401);
@@ -24,10 +25,13 @@ export async function POST(req: NextRequest) {
     },
   });
 
+  // hit api to update exp and level
+  const updateExp = updateExpLevel(dataUser.id, questTitle);
+
   return getResponse(
-    historyTyping,
-    "Typing test result saved successfully",
-    201
+    historyTyping + updateExp,
+    "Success save typing test history",
+    200
   );
 }
 
