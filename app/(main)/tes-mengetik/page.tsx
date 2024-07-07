@@ -6,10 +6,13 @@ import Heading from "@/components/typing-test/Heading";
 import WordContainer from "@/components/typing-test/WordContainer";
 import Input from "@/components/typing-test/Input";
 import Result from "@/components/typing-test/Result";
-import Timer from "@/components/typing-test/Timer";
+
 import RestartButton from "@/components/typing-test/RestartButton";
 import Records from "@/components/typing-test/Records";
 import { shuffleWord } from "@/utils/typing-test/shuffleWord";
+
+import ModalDone from "@/components/typing-test/modalStart";
+import { useDisclosure } from "@nextui-org/react";
 
 const Home = () => {
   const [words, setWords] = useState<string[]>([""]);
@@ -21,7 +24,8 @@ const Home = () => {
   const [correction, setCorrection] = useState<number>(0);
   const [correctWords, setCorrectWords] = useState<number>(0);
   const [wrongWords, setWrongWords] = useState<number>(0);
-  const [records, setRecords] = useState<number[]>([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [timer, setTimer] = useState<number>(30);
   const [isTimerStarted, setIsTimerStarted] = useState<boolean>(false);
   const numberOfWords: number = useMemo(() => 200, []);
@@ -35,32 +39,14 @@ const Home = () => {
 
   useEffect(() => {
     setWords(shuffleWord(numberOfWords, language));
-    const userRecords = localStorage.getItem(language.concat("_records"));
-    const records = userRecords ? JSON.parse(userRecords) : ([] as number[]);
-    setRecords(records);
   }, [numberOfWords, language]);
 
   useEffect(() => {
     if (timer === 0) {
-      const userRecords = localStorage.getItem(language.concat("_records"));
-      let records = userRecords ? JSON.parse(userRecords) : ([] as number[]);
-
       const userResult = Math.round(correctKeystroke / 5 / 0.5);
       if (userResult > 0) {
-        let newRecords = records.concat(userResult);
-        newRecords.sort((a: number, b: number) => b - a);
-
-        if (newRecords.length > 3) {
-          newRecords = newRecords.slice(0, -1);
-        }
-
         submitTypingTestResults();
-
-        localStorage.setItem(
-          language.concat("_records"),
-          JSON.stringify(newRecords)
-        );
-        setRecords(newRecords);
+        onOpen();
       }
     }
   }, [timer, correctKeystroke, language]);
@@ -146,14 +132,6 @@ const Home = () => {
     setIsTimerStarted(false);
   };
 
-  const clearRecords = () => {
-    const bestRecords = localStorage.getItem(language.concat("_records"));
-    if (bestRecords) {
-      localStorage.removeItem(language.concat("_records"));
-      setRecords([]);
-    }
-  };
-
   const submitTypingTestResults = async () => {
     try {
       const response = await fetch("/api/typing-test", {
@@ -188,9 +166,9 @@ const Home = () => {
 
   return (
     <>
-      <div className="font-inter p-8 md:p-14 lg:p-16">
-        <div className="flex">
-          <div className="flex-none">
+      <div className="font-inter p-16">
+        <div className="flex gap-8">
+          <div className="flex-none w-[70%]">
             <Heading />
             <Result
               wpm={Math.round(correctKeystroke / 5 / 0.5)}
@@ -204,19 +182,19 @@ const Home = () => {
               wrongWords={wrongWords}
               timer={timer}
             />
-            <div className="md:max-w-4xl lg:max-w-2xl xl:max-w-3xl lg:mr-8">
+            <div className="w-full">
               <WordContainer
                 words={words}
                 isInputCorrect={isInputCorrect || wordInput.length === 0}
               />
-              <div className="flex flex-row flex-wrap md:flex-nowrap items-center justify-center mt-6 md:mt-8">
+              <div className="flex flex-row flex-wrap md:flex-nowrap items-start justify-start mt-6 md:mt-8 w-full">
                 <Input
                   value={wordInput}
                   disabled={timer === 0}
                   onChange={inputHandler}
                   onKeyUp={keyUpHandler}
                 />
-                <div className="flex-0 flex my-5 lg:my-0">
+                <div className="flex-0 flex mt-1">
                   <RestartButton onClick={restartHandler} />
                 </div>
                 <LanguageSelector
@@ -226,17 +204,8 @@ const Home = () => {
                 />
               </div>
             </div>
-            {/* <p className="text-justify text-gray-900 mt-5 text-sm lg:hidden sm:w-4/5 md:w-2/3 mx-auto">
-              This site needs to detect what kind of key is entered by the user
-              to start the timer and calculate the keystrokes.
-              <br />
-              <br />
-              However, it doesnst work properly without physical keyboard, so
-              please consider using any device with a physical keyboard to
-              access this site.
-            </p> */}
           </div>
-          <div className="flex flex-col sm:flex-row lg:flex-col justify-around lg:ml-24">
+          <div className="flex flex-col w-[30%] justify-around ">
             <Records
             // records={records}
             // clearRecords={clearRecords}
@@ -245,6 +214,22 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <ModalDone
+        hook={{
+          isOpen,
+          onOpen,
+          onClose,
+        }}
+        data={{
+          wpm: Math.round(correctKeystroke / 5 / 0.5),
+          accuracy: (
+            ((correctKeystroke * 100) / (totalKeyStrokes + correction)) as any
+          ).toFixed(2),
+          correct: correctKeystroke,
+          error: wrongKeystroke,
+          time: 30,
+        }}
+      />
     </>
   );
 };

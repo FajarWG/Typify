@@ -28,6 +28,9 @@ const Input: React.FC<Props> = (props) => {
         onKeyUp={(event: KeyboardEvent) => props.onKeyUp(event.key)}
         disabled={props.disabled}
       />
+      <span className="text-sm text-gray-400">
+        * Tulis kata yang sesuai dengan kata yang muncul di atas untuk memulai
+      </span>
     </div>
   );
 };
