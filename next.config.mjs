@@ -7,6 +7,14 @@ const nextConfig = {
     }
     return config;
   },
+
+  images: {
+    remotePatterns: [
+      {
+        hostname: "img.clerk.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

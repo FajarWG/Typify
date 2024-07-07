@@ -18,8 +18,31 @@ export async function GET(req: NextRequest) {
     orderBy: {
       wpm: "desc",
     },
-    take: 10, // Ambil 10 user teratas
+    take: 10,
   });
 
-  return getResponse(leaderboard, "Success get leaderboard", 200);
+  const leaderboardFiltered = leaderboard.filter(
+    (v: any, i: any, a: any) =>
+      a.findIndex((t: any) => t.userId === v.userId) === i
+  );
+
+  const users = await Prisma.user.findMany({
+    select: {
+      username: true,
+      level_user: true,
+      exp_user: true,
+    },
+    orderBy: {
+      level_user: "desc",
+    },
+    take: 10,
+  });
+
+  leaderboardFiltered.forEach((v: any) => {
+    const user = users.find((u: any) => u.username === v.user.username);
+    v.user.level_user = user.level_user;
+    v.user.exp_user = user.exp_user;
+  });
+
+  return getResponse(leaderboardFiltered, "Success get leaderboard", 200);
 }
