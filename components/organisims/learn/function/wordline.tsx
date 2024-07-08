@@ -11,6 +11,7 @@ import ModalStart from "../modalStart";
 import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import { words } from "./words";
+import ModalDone from "../modalDone";
 
 const Wordline: any = ({ mode, dataGame }: any) => {
   let id = useParams().id as any;
@@ -23,25 +24,16 @@ const Wordline: any = ({ mode, dataGame }: any) => {
   const inputlineRef = useRef<HTMLInputElement>(null);
   const wordlineRef = useRef<HTMLDivElement>(null);
 
-  const errorStats = useRef<ErrorStats>(new ErrorStats());
-  const errorCounter = useRef(new Counter());
-  // const generator = new Generator({
-  //   lesson: `Pelajaran${id}` as any,
-  // });
-
   const timeStart = useRef<number>(0);
 
   const [keyboard, setKeyboard] = useState<any>();
-
-  const [speedStats, setSpeedStats] = useState<any>();
 
   useEffect(() => {
     onOpen();
     // Ensure the code runs only in the client
     if (typeof window !== "undefined") {
       const kb = new Keyboard();
-      const ss = new SpeedStats();
-      setSpeedStats(ss);
+
       setKeyboard(kb);
     }
   }, []);
@@ -73,36 +65,83 @@ const Wordline: any = ({ mode, dataGame }: any) => {
     return isOk;
   };
 
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const {
+    isOpen: isDoneOpen,
+    onOpen: onDoneOpen,
+    onClose: onDoneClose,
+  } = useDisclosure();
+
+  const [startTime, setStartTime] = useState(Date.now());
+  const [totalKeystrokes, setTotalKeystrokes] = useState(0);
+  const [correctKeystrokes, setCorrectKeystrokes] = useState(0);
+
+  useEffect(() => {
+    onOpen();
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      setStartTime(Date.now());
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isDoneOpen) {
+      updateGameProgress();
+    } else {
+      const interval = setInterval(() => {
+        updateGameProgress();
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [currentPhraseIndex]);
+
+  const updateGameProgress = () => {
+    const learnWords = words[`Pelajaran${id}`];
+    const progress = ((currentPhraseIndex + 1) / learnWords.length) * 100;
+    const timeElapsed = (Date.now() - startTime) / 1000; // in seconds
+
+    const accuracy = totalKeystrokes
+      ? ((totalKeystrokes - dataGame.dataGame.error) / totalKeystrokes) * 100
+      : 100;
+
+    dataGame.setDataGame((prevData: any) => {
+      return {
+        ...prevData,
+        progress: progress.toFixed(2),
+        time: timeElapsed.toFixed(1),
+        accuracy: accuracy.toFixed(2),
+      };
+    });
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    setTotalKeystrokes((prev) => prev + 1);
     if (e.key === "Control") setCtrlPressed(true);
 
     if (e.key === "Backspace") {
       if (ctrlPressed) {
         setCtrlPressed(false);
         let curValue = inputlineRef.current?.value.trim() || "";
-
         let lastSpaceIndex = curValue.lastIndexOf(" ");
-
         rollback(lastSpaceIndex);
-
         if (inputlineRef.current) {
           inputlineRef.current.value = curValue.slice(0, lastSpaceIndex + 1);
         }
-
         return false;
       } else return false;
     }
 
     if (e.key === "Enter") {
       if (document.querySelectorAll(`.${untypedClass}`).length === 0) {
-        clean();
+        moveToNextPhrase();
       }
     }
   };
 
   const highlightMistake = () => {
     const untyped = document.querySelectorAll(`.${untypedClass}`);
-
     untyped.forEach((el) => el.classList.add(wrongClass));
     if (inputlineRef.current) {
       inputlineRef.current.classList.add(wrongClass);
@@ -115,9 +154,11 @@ const Wordline: any = ({ mode, dataGame }: any) => {
       }
     }, 200);
 
-    dataGame.setDataGame({
-      ...dataGame.dataGame,
-      error: dataGame.dataGame.error + 1,
+    dataGame.setDataGame((prevData: any) => {
+      return {
+        ...prevData,
+        error: prevData.error + 1,
+      };
     });
 
     return false;
@@ -142,17 +183,17 @@ const Wordline: any = ({ mode, dataGame }: any) => {
 
   const check = (letter: string) => {
     const untyped = document.querySelectorAll(`.${untypedClass}`);
-
     let output = false;
 
     if (letter === untyped[0]?.textContent) {
       untyped[0].classList.remove(untypedClass);
+      setCorrectKeystrokes((prev) => prev + 1);
       output = true;
     }
 
     if (untyped.length === 0 && letter === " ") {
-      output = false;
-      clean();
+      output = true;
+      moveToNextPhrase();
     }
 
     if (output) {
@@ -163,41 +204,72 @@ const Wordline: any = ({ mode, dataGame }: any) => {
   };
 
   const fill = () => {
-    // let newLetters: any = generator.getWords();
-    const learnWords = words[`Pelajaran${id}`] as any;
+    const learnWords = words[`Pelajaran${id}`];
 
-    let newLetters = learnWords[0];
+    if (!learnWords || learnWords.length === 0) {
+      console.error("No words found for the specified id.");
+      return;
+    }
+
+    let newLetters = learnWords[currentPhraseIndex];
 
     setLetters(newLetters);
 
-    let markup = "";
-    for (let letter of newLetters) {
-      markup += `<span class="${untypedClass} letter">${letter}</span>`;
-    }
+    let markup = newLetters
+      .split("")
+      .map(
+        (letter: any) => `<span class="${untypedClass} letter">${letter}</span>`
+      )
+      .join("");
 
     if (wordlineRef.current) {
       wordlineRef.current.innerHTML = markup;
     }
 
     if (inputlineRef.current) {
-      inputlineRef.current.style.width =
-        wordlineRef.current?.clientWidth + "px";
+      inputlineRef.current.style.width = `${wordlineRef.current?.clientWidth}px`;
     }
+
+    highlightKeyTarget(); // Update the visual indicator for the first key of the new phrase
   };
 
   const highlightKeyTarget = () => {
     const untyped = document.querySelectorAll(`.${untypedClass}`);
-
     let keyTarget = untyped[0]?.textContent?.trim() || "space";
-
     let pressed = letters[letters.length - 1];
     if (untyped.length > 0) {
       pressed = untyped[0]?.previousSibling?.textContent?.trim() || "space";
     }
     let toPress = keyTarget;
 
-    keyboard.highlight(pressed, toPress);
+    if (keyboard && typeof keyboard.highlight === "function") {
+      keyboard.highlight(pressed, toPress);
+    } else {
+      console.warn("Keyboard object or highlight method is not defined.");
+    }
   };
+
+  const moveToNextPhrase = () => {
+    setCurrentPhraseIndex((prevIndex) => {
+      const learnWords = words[`Pelajaran${id}`];
+      const nextIndex = prevIndex + 1;
+      if (nextIndex < learnWords.length) {
+        clean(); // Clear the input line text
+        setLetters(learnWords[nextIndex]);
+        updateGameProgress(); // Update game progress here
+        return nextIndex;
+      } else {
+        clean();
+        updateGameProgress(); // Update game progress for the last phrase
+        onDoneOpen(); // Open the done modal
+        return 0; // Reset to the first phrase if all phrases are completed
+      }
+    });
+  };
+
+  useEffect(() => {
+    fill();
+  }, [id, currentPhraseIndex]);
 
   return (
     <>
@@ -221,6 +293,14 @@ const Wordline: any = ({ mode, dataGame }: any) => {
           onClose,
         }}
         start={highlightKeyTarget}
+      />
+      <ModalDone
+        hook={{
+          isOpen: isDoneOpen,
+          onOpen: onDoneOpen,
+          onClose: onDoneClose,
+        }}
+        dataGame={dataGame}
       />
     </>
   );

@@ -6,11 +6,12 @@ import Wordline from "./function/wordline";
 import Keyboards from "./keyboards";
 import { Slider, useDisclosure } from "@nextui-org/react";
 import { Heart, XIcon } from "lucide-react";
+
+import { usePathname, useRouter } from "next/navigation";
 import { getUser } from "@/utils/getUser";
-import { useRouter } from "next/navigation";
 
 const Application: React.FC = () => {
-  const router = useRouter();
+  const router = usePathname();
 
   const [mode, setMode] = useState("novice");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,37 +47,7 @@ const Application: React.FC = () => {
   return (
     <>
       <div className="container">
-        {/* <div className="topbar">
-          <div className="speed-stats">
-            <span>
-              <div className="stats-hint">Speed stats</div>
-              <i className="ion-speedometer"></i>
-            </span>
-            <span className="speed-current">376</span>
-            <span>/</span>
-            <span className="speed-average">321</span>
-          </div>
-
-          <div className="mode-select">
-            <i className="ion-ios-game-controller-b"></i>
-            <span className="mode-title">Select mode</span>
-            <ul className="mode-dropdown">
-              <li id="beginner">Beginner</li>
-              <li id="novice">Novice</li>
-            </ul>
-          </div>
-
-          <div className="error-stats">
-            <span>
-              <div className="stats-hint">Error stats</div>
-              <i className="ion-bug"></i>
-            </span>
-            <span className="error-current"></span>
-            <span>/</span>
-            <span className="error-average"></span>
-          </div>
-        </div> */}
-        <div className="flex flex-row justify-center items-center mt-10 gap-4 w-full px-24">
+        {/* <div className="flex flex-row justify-center items-center mt-10 gap-4 w-full px-24">
           <button onClick={() => router.push("/belajar")}>
             <XIcon size={26} onClick={onClose} />
           </button>
@@ -99,7 +70,11 @@ const Application: React.FC = () => {
               <span className=" text-sm font-bold">{user?.data.hearts}</span>
             )}
           </div>
-        </div>
+        </div> */}
+
+        <h1 className="text-center text-3xl font-bold mt-10">
+          Pelajaran {parseInt(router.split("/").pop() as any) + 1}
+        </h1>
 
         <div className="flex flex-row justify-center items-center align-middle mt-10 gap-4 w-full px-24 py-4">
           <div className="flex items-center gap-2">

@@ -60,7 +60,9 @@ export const HoverEffect = ({
               <h4 className="font-bold text-large">
                 {lesson.split("n").join("n ")}
               </h4>
-              <small className="text-default-500">12 Putaran</small>
+              <small className="text-default-500">
+                Total yang akan dipelajari: {items[lesson].length}
+              </small>
             </CardHeader>
             <CardBody className="overflow-visible py-2">
               <Image
