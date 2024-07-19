@@ -1,40 +1,13 @@
-import React, { useEffect } from "react";
-import Loading from "@/app/(main)/belajar/loading";
+"use client";
+import React from "react";
 
 import { UserButton } from "@clerk/nextjs";
-import {
-  AlarmClock,
-  Gift,
-  Heart,
-  Package2,
-  Sparkles,
-  Target,
-  Zap,
-} from "lucide-react";
-import { Divider, Progress, Skeleton, Slider } from "@nextui-org/react";
-import Link from "next/link";
+
+import { Progress, Skeleton, Slider } from "@nextui-org/react";
+
 import { useLevelQuest } from "@/utils/useLevelQuest";
 
 import { useUser } from "@/utils/useUser";
-
-const footer = [
-  {
-    title: "Tentang",
-    url: "/tentang",
-  },
-  {
-    title: "Kolaborasi",
-    url: "/kolaborasi",
-  },
-  {
-    title: "Ketentuan",
-    url: "/ketentuan",
-  },
-  {
-    title: "Privasi",
-    url: "/privasi",
-  },
-];
 
 const UserCard = () => {
   const { users: user, loading }: any = useUser();

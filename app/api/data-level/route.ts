@@ -1,8 +1,9 @@
 import getResponse from "@/utils/getResponse";
+import Prisma from "@/libs/prisma";
 
 export async function POST() {
   //level
-  await prisma.level.createMany({
+  await Prisma.level.createMany({
     data: [
       { level: 1, expRequired: 100 },
       { level: 2, expRequired: 250 },
@@ -27,7 +28,7 @@ export async function POST() {
     ],
   });
 
-  await prisma.quest.createMany({
+  await Prisma.quest.createMany({
     data: [
       {
         title: "Belajar 10 menit",
@@ -79,8 +80,8 @@ export async function POST() {
 }
 
 export async function GET() {
-  const level = await prisma.level.findMany();
-  const quest = await prisma.quest.findMany();
+  const level = await Prisma.level.findMany();
+  const quest = await Prisma.quest.findMany();
 
   return getResponse({ level, quest }, "Success get data level", 200);
 }
