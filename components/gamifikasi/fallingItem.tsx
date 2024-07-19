@@ -1,6 +1,4 @@
-// components/gamifikasi/FallingItem.tsx
-
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 interface FallingItemProps {
   id: number;
@@ -8,7 +6,8 @@ interface FallingItemProps {
   left: number;
   text: string;
   image: string;
-  onClick: () => void; // Define onClick function type
+  typedText: string;
+  onAnimationEnd: () => void;
 }
 
 const FallingItem: React.FC<FallingItemProps> = ({
@@ -17,16 +16,44 @@ const FallingItem: React.FC<FallingItemProps> = ({
   left,
   text,
   image,
-  onClick,
+  typedText,
+  onAnimationEnd,
 }) => {
+  const itemRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (itemRef.current) {
+      itemRef.current.style.animation = "fall 7s linear";
+    }
+  }, []);
+
+  const getColoredText = () => {
+    let coloredText = [];
+    for (let i = 0; i < text.length; i++) {
+      let color;
+      if (i < typedText.length) {
+        color = text[i] === typedText[i] ? "text-green-500" : "text-red-500";
+      } else {
+        color = "text-black";
+      }
+      coloredText.push(
+        <span key={i} className={color}>
+          {text[i]}
+        </span>
+      );
+    }
+    return coloredText;
+  };
+
   return (
     <div
-      style={{ top, left }}
-      className="absolute cursor-pointer"
-      onClick={onClick} // Handle click event
+      ref={itemRef}
+      style={{ left: `${left}px`, top: `${top}px` }}
+      className="absolute flex flex-col items-center"
+      onAnimationEnd={onAnimationEnd}
     >
-      <img src={image} alt={text} className="w-12 h-12" />
-      <p>{text}</p>
+      <img src={image} alt={text} className="w-16 h-16 mb-2" />
+      <p className="text-center">{getColoredText()}</p>
     </div>
   );
 };

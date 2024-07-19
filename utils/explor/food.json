@@ -1,0 +1,7 @@
+[
+  { "id": 1, "text": "rendang", "image": "/img/explor/rendang.png" },
+  { "id": 2, "text": "sate", "image": "/img/explor/Sate.png" },
+  { "id": 3, "text": "soto ayam", "image": "/img/explor/Soto Ayam.png" },
+  { "id": 4, "text": "nasi goreng", "image": "/img/explor/Nasi Goreng.png" },
+  { "id": 5, "text": "tumpeng", "image": "/img/explor/Tumpeng.png" }
+]

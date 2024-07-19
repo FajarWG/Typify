@@ -466,3 +466,12 @@ span.untyped.wrong {
   text-align: right;
   justify-content: flex-end;
 }
+
+@keyframes fall {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}

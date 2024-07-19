@@ -1,0 +1,8 @@
+[
+    { "id": 1, "text": "angklung", "image": "/img/explor/angklung.png" },
+    { "id": 2, "text": "suling", "image": "/img/explor/suling.png" },
+    { "id": 3, "text": "bende", "image": "/img/explor/bende.png" },
+    { "id": 4, "text": "pantino", "image": "/img/explor/pantino.png" },
+    { "id": 5, "text": "serunai", "image": "/img/explor/serunai.png" }
+  ]
+  
