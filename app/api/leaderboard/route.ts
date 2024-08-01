@@ -24,7 +24,6 @@ export async function GET(req: NextRequest) {
     orderBy: {
       wpm: "desc",
     },
-    take: 10,
   });
 
   const leaderboardFiltered = leaderboard.filter(
@@ -41,7 +40,6 @@ export async function GET(req: NextRequest) {
     orderBy: {
       level_user: "desc",
     },
-    take: 10,
   });
 
   leaderboardFiltered.forEach((v: any) => {
