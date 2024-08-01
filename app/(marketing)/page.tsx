@@ -45,7 +45,7 @@ const Page = () => {
     <div className="flex flex-col gap-52 ">
       <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-row items-center justify-center p-4 gap-2 mt-[13rem]">
         <div className="flex w-[424px] h-[424px] mb-0 items-center align-middle">
-          <Image src="/vercel.svg" alt="Hero" width={250} height={250} />
+          <Image src="/img/Typify.png" alt="Hero" width={250} height={250} />
         </div>
         <div className="flex flex-col gap-2 max-w-[390px]">
           <div className="text-3xl mx-auto font-semibold text-neutral-600 dark:text-neutral-400">
@@ -91,11 +91,6 @@ const Page = () => {
         </div>
       </div>
       <StickyScroll content={content} />
-      <InfiniteMovingCards
-        items={testimonials}
-        direction="right"
-        speed="slow"
-      />
     </div>
   );
 };

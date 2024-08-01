@@ -16,13 +16,13 @@ export default function Sidebar({ children }: any) {
           expanded ? "w-[256px]" : "w-[70px]"
         } `}
       >
-        <div className="p-6  flex justify-between items-center">
+        <div className=" mt-6  flex justify-between items-center">
           <Image
-            src="/vercel.svg"
+            src="/img/Typify.png"
             className={`overflow-hidden transition-all `}
             alt=""
-            width={32}
-            height={32}
+            width={92}
+            height={92}
           />
         </div>
 

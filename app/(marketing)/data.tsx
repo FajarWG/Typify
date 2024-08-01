@@ -12,7 +12,7 @@ export const content = [
   {
     title: "Belajar Budaya Indonesia",
     description:
-      "Belajar Budaya Indonesia sambil belajar mengetik agar budaya Indonesia tetap lestari. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Belajar Budaya Indonesia sambil belajar mengetik agar budaya Indonesia tetap lestari.",
     content: (
       <div className="h-full w-full  flex items-center justify-center text-white">
         Belajar Budaya Indonesia
@@ -22,7 +22,7 @@ export const content = [
   {
     title: "Tes Kecepatan Mengetik",
     description:
-      "Tes kecepatan mengetik untuk mengukur kemampuan mengetik anda. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Tes kecepatan mengetik untuk mengukur kemampuan mengetik anda.",
     content: (
       <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] flex items-center justify-center text-white">
         Tes Kecepatan Mengetik
@@ -31,8 +31,7 @@ export const content = [
   },
   {
     title: "Leaderboard",
-    description:
-      "Lihat peringkat anda dan pemain lainnya di leaderboard kami. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Lihat peringkat anda dan pemain lainnya di leaderboard kami.",
     content: (
       <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
         Leaderboard

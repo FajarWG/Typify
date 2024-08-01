@@ -14,7 +14,6 @@ const MarketingLayout = ({ children }: Props) => {
         {children}
       </main>
 
-      <Footer />
       <BackgroundBeams />
     </div>
   );
