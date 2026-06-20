@@ -1,0 +1,24 @@
+.shell {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-10) var(--page-gutter);
+  background: var(--color-paper);
+}
+
+.exitBtn {
+  background: transparent;
+  border: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-input);
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  margin-bottom: var(--space-3);
+}
+
+.exitBtn:hover {
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+}
