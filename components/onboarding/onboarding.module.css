@@ -1,0 +1,465 @@
+/* Typify · onboarding shell + per-step layout
+ * Hum · genre: playful · theme: hum · onboarding
+ * Multi-accent sparingly: pear primary CTA, cyan secondary, coral for the
+ * mascot's "I'm happy" moment. Cards lift on hover (signature move #3).
+ */
+
+.shell {
+  min-height: 100dvh;
+  background: var(--color-paper);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-block: var(--space-6);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--page-gutter);
+  max-width: var(--page-max);
+  width: 100%;
+  margin-inline: auto;
+}
+
+.stage {
+  display: grid;
+  place-items: center;
+  padding: var(--space-10) var(--page-gutter);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--page-gutter) var(--space-4);
+  max-width: var(--page-max);
+  width: 100%;
+  margin-inline: auto;
+}
+
+.backLink {
+  background: transparent;
+  border: 0;
+  padding: var(--space-3) var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  border-radius: var(--radius-input);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.backLink:hover:not(:disabled) {
+  color: var(--color-ink);
+}
+
+.backLink:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bigContinue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 1rem 1.8rem;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  cursor: pointer;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow:
+    0 4px 0 0 var(--color-accent-deep),
+    0 6px 12px -3px oklch(76% 0.2 95 / 0.45);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.bigContinue:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 0 var(--color-accent-deep),
+    0 12px 22px -4px oklch(76% 0.2 95 / 0.45);
+}
+
+.bigContinue:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 0 var(--color-accent-deep),
+    0 2px 6px -2px oklch(76% 0.2 95 / 0.45);
+  transition-duration: 70ms;
+}
+
+.bigContinue:focus-visible {
+  outline: 3px solid color-mix(in oklch, var(--color-accent-deep) 70%, var(--color-focus));
+  outline-offset: 3px;
+}
+
+.skipLink {
+  background: transparent;
+  border: 0;
+  padding: var(--space-3) var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink-3);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.skipLink:hover {
+  color: var(--color-ink);
+}
+
+/* ---------- welcome step ---------- */
+
+.welcomeWrap {
+  display: grid;
+  place-items: center;
+  gap: var(--space-6);
+  text-align: center;
+  max-width: 36rem;
+}
+
+.mascotFloat {
+  width: 120px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper-2);
+  box-shadow: var(--shadow-card);
+  animation: mascot-pulse 4s ease-in-out infinite;
+}
+
+@keyframes mascot-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascotFloat {
+    animation: none;
+  }
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display-s);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+}
+
+.heroLead {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-ink-2);
+  margin: 0;
+  max-width: 30rem;
+}
+
+/* ---------- shared step layout ---------- */
+
+.step {
+  width: 100%;
+  max-width: 44rem;
+  display: grid;
+  gap: var(--space-5);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+}
+
+.stepLead {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  color: var(--color-ink-2);
+  margin: 0;
+}
+
+.optionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.optionCard {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base);
+  min-width: 0;
+}
+
+.optionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  background: color-mix(in oklch, var(--color-paper-2) 80%, var(--color-accent));
+}
+
+.optionCard:active {
+  transform: translateY(0);
+}
+
+.optionCard:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.optionCardActive {
+  background: color-mix(in oklch, var(--color-accent) 70%, var(--color-paper));
+  box-shadow:
+    0 0 0 3px var(--color-accent-deep),
+    var(--shadow-card-hover);
+}
+
+.optionCardWide {
+  grid-column: span 1;
+}
+
+.optionKey {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+  opacity: 0.85;
+}
+
+.optionLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+}
+
+.optionSample {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+  letter-spacing: 0.05em;
+}
+
+.optionEmoji {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.keyboardPreview {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2) 0;
+}
+
+.keyRow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  letter-spacing: 0.18em;
+}
+
+/* ---------- class code step ---------- */
+
+.codeInput {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  padding: var(--space-4);
+  border-radius: var(--radius-input);
+  border: 2px solid color-mix(in oklch, var(--color-ink) 14%, transparent);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  transition: border-color var(--dur-fast) var(--ease-out);
+  min-width: 0;
+}
+
+.codeInput:focus-visible {
+  outline: none;
+  border-color: var(--color-accent-2);
+}
+
+/* ---------- name step ---------- */
+
+.nameInput {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  padding: var(--space-4);
+  border-radius: var(--radius-input);
+  border: 2px solid color-mix(in oklch, var(--color-ink) 14%, transparent);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  min-width: 0;
+}
+
+.nameInput:focus-visible {
+  outline: none;
+  border-color: var(--color-accent-2);
+}
+
+.nameInput[aria-invalid="true"] {
+  border-color: var(--color-accent-3);
+}
+
+.fieldLabel {
+  display: inline-flex;
+}
+
+.fieldHint {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- mascot step ---------- */
+
+.mascotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-3);
+}
+
+.mascotTile {
+  display: grid;
+  place-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-2);
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--dur-base) var(--ease-spring),
+    box-shadow var(--dur-base) var(--ease-out);
+  min-width: 0;
+}
+
+.mascotTile:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.mascotTileActive {
+  background: color-mix(in oklch, var(--color-accent) 70%, var(--color-paper));
+  box-shadow:
+    0 0 0 3px var(--color-accent-deep),
+    var(--shadow-card-hover);
+}
+
+.mascotTile:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.mascotTileName {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+}
+
+.colorRow {
+  display: inline-flex;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+}
+
+.colorDot {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  border: 2px solid color-mix(in oklch, var(--color-ink) 12%, transparent);
+  cursor: pointer;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.colorDot:hover {
+  transform: scale(1.1);
+}
+
+.colorDotActive {
+  box-shadow:
+    0 0 0 3px var(--color-paper),
+    0 0 0 5px var(--color-ink);
+}
+
+.colorDot:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- warmup step ---------- */
+
+.warmupActions {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+
+/* ---------- visually-hidden helper (reused) ---------- */
+
+:global(.sr-only) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .optionCard,
+  .mascotTile,
+  .colorDot,
+  .bigContinue {
+    transition: background-color var(--dur-base), box-shadow var(--dur-base);
+  }
+  .optionCard:hover,
+  .mascotTile:hover,
+  .bigContinue:hover {
+    transform: none;
+  }
+}
