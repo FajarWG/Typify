@@ -94,6 +94,9 @@ export function grantRewards(options: RewardOptions): RewardResult {
           },
         ],
       });
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("typify:quests-updated"));
+      }
     }
   }
 

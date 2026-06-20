@@ -1,40 +1,50 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { LESSONS } from "@/content/lessons";
-import { getProgress } from "@/lib/storage";
+import {
+  subscribe as subscribeProfile,
+  getSnapshot as getProfileSnapshot,
+  getServerSnapshot as getProfileServerSnapshot,
+} from "@/lib/profileStore";
+import {
+  subscribe as subscribeProgress,
+  getSnapshot as getProgressSnapshot,
+  getServerSnapshot as getProgressServerSnapshot,
+} from "@/lib/progressStore";
 
 import styles from "./lessons.module.css";
-
-function subscribeProgress(callback: () => void): () => void {
-  if (typeof window === "undefined") return () => {};
-  window.addEventListener("typify:progress-updated", callback);
-  return () => window.removeEventListener("typify:progress-updated", callback);
-}
-
-function getProgressSnapshot() {
-  return getProgress();
-}
-
-function getServerSnapshot() {
-  return null;
-}
 
 export default function LessonsListPage() {
   const { t } = useTranslation();
   const router = useRouter();
+  const profile = useSyncExternalStore(
+    subscribeProfile,
+    getProfileSnapshot,
+    getProfileServerSnapshot,
+  );
   const progress = useSyncExternalStore(
     subscribeProgress,
     getProgressSnapshot,
-    getServerSnapshot,
+    getProgressServerSnapshot,
   );
 
-  const unlocked = new Set(progress?.unlockedLessonIds ?? ["home-row"]);
-  const completed = new Set(progress?.completedLessonIds ?? []);
+  useEffect(() => {
+    if (!profile || !profile.onboardingCompleted) {
+      router.replace("/onboarding");
+    }
+  }, [profile, router]);
+
+  if (!profile || !profile.onboardingCompleted) {
+    return <main className={styles.shell} aria-hidden />;
+  }
+
+  const unlocked = new Set(progress.unlockedLessonIds);
+  const completed = new Set(progress.completedLessonIds);
 
   return (
     <main className={styles.shell}>

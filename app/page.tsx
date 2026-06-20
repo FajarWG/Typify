@@ -1,29 +1,18 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { findMascot } from "@/lib/mascots";
-import { getProfile } from "@/lib/storage";
-import type { StudentProfile } from "@/types/localStorage";
+import {
+  subscribe as subscribeProfile,
+  getSnapshot as getProfileSnapshot,
+  getServerSnapshot as getProfileServerSnapshot,
+} from "@/lib/profileStore";
 
 import styles from "./home.module.css";
-
-function subscribeProfile(callback: () => void): () => void {
-  if (typeof window === "undefined") return () => {};
-  window.addEventListener("typify:profile-updated", callback);
-  return () => window.removeEventListener("typify:profile-updated", callback);
-}
-
-function getProfileSnapshot(): StudentProfile | null {
-  return getProfile();
-}
-
-function getProfileServerSnapshot(): StudentProfile | null {
-  return null;
-}
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -34,18 +23,20 @@ export default function HomePage() {
     getProfileServerSnapshot,
   );
 
-  if (profile === null) {
-    if (typeof window !== "undefined") {
-      router.replace("/onboarding");
-    }
-    return null;
-  }
+  const hydrated = profile !== null || typeof window === "undefined";
 
-  if (!profile.onboardingCompleted) {
-    if (typeof window !== "undefined") {
+  useEffect(() => {
+    if (!profile || !profile.onboardingCompleted) {
       router.replace("/onboarding");
     }
-    return null;
+  }, [profile, router]);
+
+  if (!hydrated || !profile || !profile.onboardingCompleted) {
+    return (
+      <main className={styles.shell}>
+        <div className={styles.hero} aria-hidden />
+      </main>
+    );
   }
 
   const mascot = findMascot(profile.mascot);
@@ -103,7 +94,7 @@ export default function HomePage() {
         <Link href="/profile" className={styles.navCard} style={{ background: "color-mix(in oklch, var(--color-accent) 26%, var(--color-paper))" }}>
           <span className="mono-label">06</span>
           <span className={styles.navCardTitle}>{t("nav.profile")}</span>
-          <span className={styles.navCardDesc}>{findMascot(profile.mascot).name}</span>
+          <span className={styles.navCardDesc}>{mascot.name}</span>
         </Link>
         <Link href="/settings" className={styles.navCard} style={{ background: "var(--color-paper-2)" }}>
           <span className="mono-label">07</span>

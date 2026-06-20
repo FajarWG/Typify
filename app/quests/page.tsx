@@ -1,16 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import {
-  getProfile,
-  getQuests,
-  getProgress,
-  getSpeedTest,
-} from "@/lib/storage";
+  subscribe as subscribeProfile,
+  getSnapshot as getProfileSnapshot,
+  getServerSnapshot as getProfileServerSnapshot,
+} from "@/lib/profileStore";
 
 import styles from "./quests.module.css";
 
@@ -46,45 +45,40 @@ const QUESTS: QuestDescriptor[] = [
   },
 ];
 
-function subscribeQuests(callback: () => void): () => void {
-  if (typeof window === "undefined") return () => {};
-  window.addEventListener("typify:rewards", callback);
-  window.addEventListener("typify:progress-updated", callback);
-  return () => {
-    window.removeEventListener("typify:rewards", callback);
-    window.removeEventListener("typify:progress-updated", callback);
-  };
-}
-
-function snapshot() {
-  return {
-    quests: getQuests(),
-    progress: getProgress(),
-    speed: getSpeedTest(),
-    profile: getProfile(),
-  };
-}
-
-function serverSnapshot() {
-  return null;
-}
-
 export default function QuestsPage() {
   const { t } = useTranslation();
   const router = useRouter();
-  const state = useSyncExternalStore(subscribeQuests, snapshot, serverSnapshot);
+  const profile = useSyncExternalStore(
+    subscribeProfile,
+    getProfileSnapshot,
+    getProfileServerSnapshot,
+  );
+  // Bump counter every time quests mutate so the readTodayQuestCodes() call
+  // below re-runs. useSyncExternalStore is overkill for this — we just need
+  // a re-render trigger.
+  const [, force] = useState(0);
+  useEffect(() => {
+    const handler = (): void => force((n) => n + 1);
+    window.addEventListener("typify:quests-updated", handler);
+    window.addEventListener("typify:rewards", handler);
+    return () => {
+      window.removeEventListener("typify:quests-updated", handler);
+      window.removeEventListener("typify:rewards", handler);
+    };
+  }, []);
 
-  if (!state || !state.profile) {
-    if (typeof window !== "undefined") router.replace("/onboarding");
-    return null;
+  useEffect(() => {
+    if (!profile || !profile.onboardingCompleted) {
+      router.replace("/onboarding");
+    }
+  }, [profile, router]);
+
+  if (!profile || !profile.onboardingCompleted) {
+    return <main className={styles.shell} aria-hidden />;
   }
 
-  const today = new Date().toISOString().slice(0, 10);
-  const completedCodes = new Set(
-    state.quests.completed
-      .filter((q) => q.localDate === today)
-      .map((q) => q.questCode),
-  );
+  // Derive today's completed quest codes from the live quests blob.
+  const completedCodes = readTodayQuestCodes();
 
   return (
     <main className={styles.shell}>
@@ -128,9 +122,26 @@ export default function QuestsPage() {
         })}
       </ul>
 
-      <p className={styles.note}>
-        {completedCodes.size} / 3 today
-      </p>
+      <p className={styles.note}>{completedCodes.size} / 3 today</p>
     </main>
   );
+}
+
+function readTodayQuestCodes(): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = window.localStorage.getItem("typify:quests");
+    if (!raw) return new Set();
+    const parsed = JSON.parse(raw) as {
+      completed?: Array<{ questCode: string; localDate: string }>;
+    };
+    const today = new Date().toISOString().slice(0, 10);
+    return new Set(
+      (parsed.completed ?? [])
+        .filter((q) => q.localDate === today)
+        .map((q) => q.questCode),
+    );
+  } catch {
+    return new Set();
+  }
 }

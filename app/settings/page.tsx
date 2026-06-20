@@ -4,9 +4,20 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
-import { getProfile, getSettings, setProfile, setSettings } from "@/lib/storage";
+import { setProfile, setSettings } from "@/lib/storage";
 import { setUILanguage } from "@/components/I18nProvider";
 import { getI18n, LANGUAGE_LABELS, SUPPORTED_LANGUAGES } from "@/i18n";
+import {
+  subscribe as subscribeProfile,
+  getSnapshot as getProfileSnapshot,
+  getServerSnapshot as getProfileServerSnapshot,
+} from "@/lib/profileStore";
+import {
+  subscribe as subscribeSettings,
+  getSnapshot as getSettingsSnapshot,
+  getServerSnapshot as getSettingsServerSnapshot,
+} from "@/lib/settingsStore";
+import { useSyncExternalStore } from "react";
 import type {
   CultureCode,
   KeyboardLayout,
@@ -29,8 +40,16 @@ const KEYBOARD_LABELS: Record<KeyboardLayout, { key: string }> = {
 export default function SettingsPage() {
   const router = useRouter();
   const { t } = useTranslation();
-  const profile = getProfile();
-  const initial = getSettings();
+  const profile = useSyncExternalStore(
+    subscribeProfile,
+    getProfileSnapshot,
+    getProfileServerSnapshot,
+  );
+  const initial = useSyncExternalStore(
+    subscribeSettings,
+    getSettingsSnapshot,
+    getSettingsServerSnapshot,
+  );
   const [settings, setLocal] = useState(initial);
 
   function toggle<K extends keyof typeof initial>(key: K, value: (typeof initial)[K]): void {

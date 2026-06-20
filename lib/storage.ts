@@ -146,6 +146,9 @@ export function getQuests(): QuestState {
 
 export function setQuests(state: QuestState): void {
   writeRaw(STORAGE_KEYS.quests, JSON.stringify(state));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("typify:quests-updated"));
+  }
 }
 
 export function getUnlocks(): UnlockState {

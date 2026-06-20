@@ -1,14 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 import {
-  getProfile,
-  getProgress,
-  getSpeedTest,
-  getUnlocks,
-} from "@/lib/storage";
+  subscribe as subscribeProfile,
+  getSnapshot as getProfileSnapshot,
+} from "@/lib/profileStore";
+import {
+  subscribe as subscribeProgress,
+  getSnapshot as getProgressSnapshot,
+} from "@/lib/progressStore";
 
 import { ProfileView } from "@/components/profile/ProfileView";
 
@@ -34,12 +36,42 @@ interface Snapshot {
   };
 }
 
+function readSpeedAndUnlocks(): Pick<Snapshot, "stats" | "unlocks"> {
+  if (typeof window === "undefined") {
+    return {
+      stats: { lessonsCompleted: 0, speedBestWpm: null, speedBestAccuracy: null, culturesExplored: 0 },
+      unlocks: { accessories: [], stickers: [] },
+    };
+  }
+  const read = (key: string): unknown => {
+    try {
+      const raw = window.localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  };
+  const speed = read("typify:speed-test") as { personalBest?: { wpm: number; accuracy: number } } | null;
+  const unlocks = read("typify:unlocks") as { accessories?: string[]; stickers?: string[] } | null;
+  return {
+    stats: {
+      speedBestWpm: speed?.personalBest?.wpm ?? null,
+      speedBestAccuracy: speed?.personalBest?.accuracy ?? null,
+      lessonsCompleted: 0,
+      culturesExplored: 0,
+    },
+    unlocks: {
+      accessories: unlocks?.accessories ?? [],
+      stickers: unlocks?.stickers ?? [],
+    },
+  };
+}
+
 function buildSnapshot(): Snapshot | null {
-  const profile = getProfile();
+  const profile = getProfileSnapshot();
   if (!profile) return null;
-  const progress = getProgress();
-  const speed = getSpeedTest();
-  const unlocks = getUnlocks();
+  const progress = getProgressSnapshot();
+  const { stats, unlocks } = readSpeedAndUnlocks();
   const culturesExplored = new Set(
     Object.values(progress.bestLessonResults).map((r) => r.cultureId),
   ).size;
@@ -55,29 +87,33 @@ function buildSnapshot(): Snapshot | null {
     },
     stats: {
       lessonsCompleted: progress.completedLessonIds.length,
-      speedBestWpm: speed.personalBest?.wpm ?? null,
-      speedBestAccuracy: speed.personalBest?.accuracy ?? null,
       culturesExplored,
+      speedBestWpm: stats.speedBestWpm,
+      speedBestAccuracy: stats.speedBestAccuracy,
     },
-    unlocks: {
-      accessories: unlocks.accessories,
-      stickers: unlocks.stickers,
-    },
+    unlocks,
   };
 }
 
 function subscribe(_cb: () => void): () => void {
   if (typeof window === "undefined") return () => {};
   const handler = (): void => _cb();
-  window.addEventListener("typify:profile-updated", handler);
-  window.addEventListener("typify:progress-updated", handler);
-  window.addEventListener("typify:rewards", handler);
-  window.addEventListener("typify:settings-updated", handler);
+  // Inherit the profile + progress subscribers so a profile/quest update
+  // invalidates the snapshot too.
+  const profileUnsub = subscribeProfile(handler);
+  const progressUnsub = subscribeProgress(handler);
+  const onStorage = (): void => _cb();
+  window.addEventListener("typify:rewards", onStorage);
+  window.addEventListener("typify:settings-updated", onStorage);
+  window.addEventListener("typify:quests-updated", onStorage);
+  window.addEventListener("typify:speed-test-saved", onStorage);
   return () => {
-    window.removeEventListener("typify:profile-updated", handler);
-    window.removeEventListener("typify:progress-updated", handler);
-    window.removeEventListener("typify:rewards", handler);
-    window.removeEventListener("typify:settings-updated", handler);
+    profileUnsub();
+    progressUnsub();
+    window.removeEventListener("typify:rewards", onStorage);
+    window.removeEventListener("typify:settings-updated", onStorage);
+    window.removeEventListener("typify:quests-updated", onStorage);
+    window.removeEventListener("typify:speed-test-saved", onStorage);
   };
 }
 
@@ -89,15 +125,16 @@ export default function ProfilePage() {
   const router = useRouter();
   const data = useSyncExternalStore(subscribe, buildSnapshot, getServerSnapshot);
 
-  if (!data) {
-    if (typeof window !== "undefined") {
-      // Defer to give the event loop a chance to update localStorage
+  useEffect(() => {
+    if (!data) {
       const id = window.setTimeout(() => {
-        const p = getProfile();
-        if (!p) router.replace("/onboarding");
+        if (!getProfileSnapshot()) router.replace("/onboarding");
       }, 0);
-      window.clearTimeout(id);
+      return () => window.clearTimeout(id);
     }
+  }, [data, router]);
+
+  if (!data) {
     return <main style={{ minHeight: "100dvh", background: "var(--color-paper)" }} />;
   }
 
