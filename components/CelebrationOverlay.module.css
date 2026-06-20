@@ -1,0 +1,38 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.burst {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background:
+    linear-gradient(90deg, transparent 47%, var(--color-accent-3) 47% 53%, transparent 53%),
+    linear-gradient(0deg, transparent 47%, var(--color-accent-3) 47% 53%, transparent 53%);
+  animation: star-burst 420ms ease-out forwards;
+}
+
+@keyframes star-burst {
+  0% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.2) rotate(35deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.4) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst {
+    animation: none;
+    opacity: 0;
+  }
+}
