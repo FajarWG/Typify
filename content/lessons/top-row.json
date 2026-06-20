@@ -1,0 +1,38 @@
+{
+  "id": "top-row",
+  "order": 2,
+  "titleKey": "lessons.topRow",
+  "keySet": ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+  "tracks": {
+    "id": [
+      { "text": "qqq www eee" },
+      { "text": "rrrr tttt yyy" },
+      { "text": "topi topi" },
+      { "text": "waktu itu" },
+      { "text": "raja pura" },
+      { "text": "pita putih" },
+      { "text": "kue putu" },
+      { "text": "pohon tua" }
+    ],
+    "en": [
+      { "text": "qwerty uiop" },
+      { "text": "the quick typist" },
+      { "text": "pour a quiet drink" },
+      { "text": "typewriter poetry" },
+      { "text": "power up" },
+      { "text": "quiet riot" },
+      { "text": "purple yoyo" },
+      { "text": "top of the tower" }
+    ],
+    "ja": [
+      { "display": "か", "input": "ka" },
+      { "display": "き", "input": "ki" },
+      { "display": "く", "input": "ku" },
+      { "display": "け", "input": "ke" },
+      { "display": "こ", "input": "ko" },
+      { "display": "かき", "input": "kaki" },
+      { "display": "いけ", "input": "ike" },
+      { "display": "ゆき", "input": "yuki" }
+    ]
+  }
+}

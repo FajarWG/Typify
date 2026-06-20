@@ -1,0 +1,38 @@
+{
+  "id": "home-row",
+  "order": 1,
+  "titleKey": "lessons.homeRow",
+  "keySet": ["a", "s", "d", "f", "j", "k", "l", ";"],
+  "tracks": {
+    "id": [
+      { "text": "asdf jkl;" },
+      { "text": "fad fad fad" },
+      { "text": "jals jals jals" },
+      { "text": "dksl dksl" },
+      { "text": "fjaf fjaf" },
+      { "text": "sasa dada" },
+      { "text": "lala kala" },
+      { "text": "fads lads" }
+    ],
+    "en": [
+      { "text": "asdf jkl;" },
+      { "text": "sad lad" },
+      { "text": "jails fail" },
+      { "text": "a flask of jazz" },
+      { "text": "alfalfa salad" },
+      { "text": "a sad dad" },
+      { "text": "all fall" },
+      { "text": "skull and sash" }
+    ],
+    "ja": [
+      { "display": "あ", "input": "a" },
+      { "display": "い", "input": "i" },
+      { "display": "う", "input": "u" },
+      { "display": "え", "input": "e" },
+      { "display": "お", "input": "o" },
+      { "display": "あい", "input": "ai" },
+      { "display": "うえ", "input": "ue" },
+      { "display": "あおい", "input": "aoi" }
+    ]
+  }
+}

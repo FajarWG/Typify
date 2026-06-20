@@ -1,0 +1,38 @@
+{
+  "id": "numbers",
+  "order": 6,
+  "titleKey": "lessons.numbers",
+  "keySet": ["1","2","3","4","5","6","7","8","9","0"],
+  "tracks": {
+    "id": [
+      { "text": "1 2 3 4 5" },
+      { "text": "6 7 8 9 0" },
+      { "text": "081234567890" },
+      { "text": "10 20 30 40" },
+      { "text": "2024 adalah tahun" },
+      { "text": "rumah nomor 7" },
+      { "text": "kelas 9b" },
+      { "text": "1+1=2" }
+    ],
+    "en": [
+      { "text": "1 2 3 4 5" },
+      { "text": "6 7 8 9 0" },
+      { "text": "phone 555-0123" },
+      { "text": "year 2024" },
+      { "text": "address 42 main" },
+      { "text": "3.14159265" },
+      { "text": "room 9b" },
+      { "text": "2+2=4" }
+    ],
+    "ja": [
+      { "display": "いち", "input": "ichi" },
+      { "display": "に", "input": "ni" },
+      { "display": "さん", "input": "san" },
+      { "display": "よん", "input": "yon" },
+      { "display": "ご", "input": "go" },
+      { "display": "ろく", "input": "roku" },
+      { "display": "なな", "input": "nana" },
+      { "display": "はち", "input": "hachi" }
+    ]
+  }
+}

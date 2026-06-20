@@ -1,0 +1,36 @@
+{
+  "id": "shift-symbols",
+  "order": 7,
+  "titleKey": "lessons.shiftSymbols",
+  "keySet": ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "?", "_", "+"],
+  "tracks": {
+    "id": [
+      { "text": "100% murni!" },
+      { "text": "hati-hati ya!" },
+      { "text": "apa kabar?" },
+      { "text": "harga: rp 25.000" },
+      { "text": "yuk @taman" },
+      { "text": "(penting) untuk kamu" },
+      { "text": "kamu & aku" },
+      { "text": "wow! keren!" }
+    ],
+    "en": [
+      { "text": "100% pure!" },
+      { "text": "watch out!" },
+      { "text": "what's up?" },
+      { "text": "price: $25" },
+      { "text": "hey @home" },
+      { "text": "(important) note" },
+      { "text": "you & me" },
+      { "text": "wow! great!" }
+    ],
+    "ja": [
+      { "display": "！", "input": "!" },
+      { "display": "１００％", "input": "100%" },
+      { "display": "ありがとう！", "input": "arigatou!" },
+      { "display": "おはよう？", "input": "ohayou?" },
+      { "display": "がんばって＆ね", "input": "ganbatte&ne" },
+      { "display": "さくら（もも）", "input": "sakura(momo)" }
+    ]
+  }
+}

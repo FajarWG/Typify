@@ -1,0 +1,42 @@
+{
+  "id": "short-sentences",
+  "order": 5,
+  "titleKey": "lessons.shortSentences",
+  "keySet": [
+    "a","b","c","d","e","f","g","h","i","j","k","l","m",
+    "n","o","p","q","r","s","t","u","v","w","x","y","z",
+    " "
+  ],
+  "tracks": {
+    "id": [
+      { "text": "aku anak indonesia" },
+      { "text": "rumahku berwarna biru" },
+      { "text": "ayah dan ibu sayang" },
+      { "text": "sekolah itu seru" },
+      { "text": "kucingku suka ikan" },
+      { "text": "ayo pergi ke taman" },
+      { "text": "sore ini mendung" },
+      { "text": "besok adalah hari baru" }
+    ],
+    "en": [
+      { "text": "i am learning to type" },
+      { "text": "the sun is shining today" },
+      { "text": "open the window please" },
+      { "text": "where is my red cup" },
+      { "text": "cats sleep a lot each day" },
+      { "text": "we read books at night" },
+      { "text": "school starts at eight" },
+      { "text": "this is a quiet street" }
+    ],
+    "ja": [
+      { "display": "わたし は がくせい です", "input": "watashi ha gakusei desu" },
+      { "display": "にほんご を べんきょう します", "input": "nihongo wo benkyou shimasu" },
+      { "display": "きょう は いいてんき です", "input": "kyou ha iitenki desu" },
+      { "display": "ありがとう ございました", "input": "arigatou gozaimashita" },
+      { "display": "また あした", "input": "mata ashita" },
+      { "display": "いってきます", "input": "ittekimasu" },
+      { "display": "ただいま", "input": "tadaima" },
+      { "display": "いただきます", "input": "itadakimasu" }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "all-letters",
+  "order": 4,
+  "titleKey": "lessons.allLetters",
+  "keySet": [
+    "a","b","c","d","e","f","g","h","i","j","k","l","m",
+    "n","o","p","q","r","s","t","u","v","w","x","y","z"
+  ],
+  "tracks": {
+    "id": [
+      { "text": "ayo belajar mengetik" },
+      { "text": "rumah kita di sana" },
+      { "text": "selamat pagi semua" },
+      { "text": "saya suka menulis" },
+      { "text": "bahasa ibu pertiwi" },
+      { "text": "anak kucing lucu" },
+      { "text": "ayo bermain bersama" },
+      { "text": "jangan lupa istirahat" }
+    ],
+    "en": [
+      { "text": "the quick brown fox" },
+      { "text": "jumps over a lazy dog" },
+      { "text": "pack my box with five" },
+      { "text": "dozen liquor jugs" },
+      { "text": "a wizard's job is" },
+      { "text": "vexing lazy nymphs" },
+      { "text": "hello little explorer" },
+      { "text": "keep your eyes on the keys" }
+    ],
+    "ja": [
+      { "display": "こんにちは", "input": "konnichiha" },
+      { "display": "ありがとう", "input": "arigatou" },
+      { "display": "おはよう", "input": "ohayou" },
+      { "display": "さようなら", "input": "sayounara" },
+      { "display": "またね", "input": "matane" },
+      { "display": "よろしく", "input": "yoroshiku" },
+      { "display": "おやすみ", "input": "oyasumi" },
+      { "display": "がんばって", "input": "ganbatte" }
+    ]
+  }
+}

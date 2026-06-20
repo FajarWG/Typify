@@ -1,0 +1,38 @@
+{
+  "id": "bottom-row",
+  "order": 3,
+  "titleKey": "lessons.bottomRow",
+  "keySet": ["z", "x", "c", "v", "b", "n", "m", ",", "."],
+  "tracks": {
+    "id": [
+      { "text": "zzz xxx ccc" },
+      { "text": "vvv bbb nnn" },
+      { "text": "makan nasi" },
+      { "text": "zaman modern" },
+      { "text": "ban berjalan" },
+      { "text": "cinta kamu" },
+      { "text": "nyaman sekali" },
+      { "text": "pizza, ya" }
+    ],
+    "en": [
+      { "text": "zxcv bnm,." },
+      { "text": "buzzing bees" },
+      { "text": "vixen mixed" },
+      { "text": "cinnamon bun" },
+      { "text": "zip zap zoom" },
+      { "text": "minimum wax" },
+      { "text": "back and forth" },
+      { "text": "maze of vines" }
+    ],
+    "ja": [
+      { "display": "さ", "input": "sa" },
+      { "display": "し", "input": "shi" },
+      { "display": "す", "input": "su" },
+      { "display": "せ", "input": "se" },
+      { "display": "そ", "input": "so" },
+      { "display": "さしす", "input": "sashisu" },
+      { "display": "せみ", "input": "semi" },
+      { "display": "みそ", "input": "miso" }
+    ]
+  }
+}
