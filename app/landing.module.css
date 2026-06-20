@@ -1,0 +1,986 @@
+/* Hallmark · macrostructure: Marquee Hero · H1 knobs: size=xxl, alignment=left-bias
+ * genre: playful · theme: Hum · paper: cream · accent hue: multi (pear + cyan + coral)
+ * nav: N5 Floating pill · footer: Ft5 Statement
+ * previous macrostructure: (none — first Hallmark build for this project)
+ */
+
+/* ---------------------------------------------------------------------------
+ * N5 floating pill · detached from top, blur+saturate backdrop.
+ * ------------------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  top: var(--space-4);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  padding-inline: var(--page-gutter);
+}
+
+.navPill {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--color-paper) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklch, var(--color-paper) 100%, transparent) inset,
+    0 12px 32px -16px oklch(20% 0.012 250 / 0.18),
+    0 2px 4px -2px oklch(20% 0.012 250 / 0.08);
+  border: 1px solid color-mix(in oklch, var(--color-ink) 8%, transparent);
+  max-width: 100%;
+}
+
+.navBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-display);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  min-height: 32px;
+}
+
+.navBrandMark {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow:
+    inset 0 -2px 0 0 color-mix(in oklch, var(--color-accent-deep) 60%, transparent);
+  flex-shrink: 0;
+  animation: nav-pulse 4s var(--ease-out) infinite;
+}
+
+@keyframes nav-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+.navBrandWord {
+  font-weight: 700;
+}
+
+.navLinks {
+  display: flex;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  color: var(--color-ink-2);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  min-height: 32px;
+  transition:
+    color var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--color-ink);
+  background: color-mix(in oklch, var(--color-paper-2) 80%, transparent);
+}
+
+.navLink:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.navCta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  min-height: 36px;
+  box-shadow:
+    0 4px 0 0 color-mix(in oklch, var(--color-ink) 70%, transparent),
+    0 6px 12px -3px oklch(20% 0.012 250 / 0.25);
+  transform: translateY(0);
+  transition:
+    transform 140ms var(--ease-out),
+    box-shadow 140ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.navCta:hover {
+  transform: translateY(-2px);
+  background: color-mix(in oklch, var(--color-ink) 92%, var(--color-accent-2));
+  color: var(--color-paper);
+  box-shadow:
+    0 6px 0 0 color-mix(in oklch, var(--color-ink) 70%, transparent),
+    0 12px 22px -4px oklch(20% 0.012 250 / 0.3);
+}
+
+.navCta:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklch, var(--color-ink) 70%, transparent),
+    0 2px 6px -2px oklch(20% 0.012 250 / 0.18);
+  transition-duration: 70ms;
+}
+
+.navCta:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .navLinks {
+    display: none;
+  }
+  .navPill {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Page shell
+ * ------------------------------------------------------------------------- */
+
+.shell {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* ---------------------------------------------------------------------------
+ * H1 Marquee hero · fills the viewport, no subhead, no CTA in fold.
+ * ------------------------------------------------------------------------- */
+
+.hero {
+  min-height: 100svh;
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(6rem, 12vh, 10rem) var(--page-gutter) clamp(4rem, 8vh, 6rem);
+  background: var(--color-paper);
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: color-mix(in oklch, var(--color-ink) 8%, transparent);
+}
+
+.heroStatement {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 12vw, 9.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+  margin: 0;
+  max-width: 16ch;
+  display: grid;
+  gap: 0.05em;
+  text-align: left;
+}
+
+.heroLine {
+  display: block;
+}
+
+.hl {
+  font-style: normal;
+}
+
+/* ---------------------------------------------------------------------------
+ * Rule between hero and below-fold
+ * ------------------------------------------------------------------------- */
+
+.rule {
+  border: 0;
+  height: 1px;
+  margin: 0 var(--page-gutter);
+  background: color-mix(in oklch, var(--color-ink) 12%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+ * Lead subhead
+ * ------------------------------------------------------------------------- */
+
+.lead {
+  padding: clamp(4rem, 8vw, 6rem) var(--page-gutter) clamp(1.5rem, 3vw, 2.5rem);
+  max-width: var(--page-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.leadText {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 2.4vw, var(--text-2xl));
+  line-height: var(--leading-snug);
+  color: var(--color-ink-2);
+  margin: 0;
+  max-width: 38ch;
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------------------------
+ * Section · shared shell for every below-fold block
+ * ------------------------------------------------------------------------- */
+
+.section {
+  padding: clamp(2.5rem, 5vw, 4rem) var(--page-gutter);
+  max-width: var(--page-max);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  gap: var(--space-5);
+}
+
+.sectionHead {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 56ch;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 2.6vw, var(--text-3xl));
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * Cultures · 3 cards, each its own accent + flag
+ * ------------------------------------------------------------------------- */
+
+.cultureGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 880px) {
+  .cultureGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.cultureCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--card-accent) 8%, var(--color-paper));
+  border: 1px solid color-mix(in oklch, var(--card-accent) 18%, transparent);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.cultureCard:hover {
+  background: color-mix(in oklch, var(--card-accent) 16%, var(--color-paper));
+  border-color: color-mix(in oklch, var(--card-accent) 36%, transparent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.cultureFlag {
+  font-size: 2.5rem;
+  line-height: 1;
+  display: block;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  border: 1px solid color-mix(in oklch, var(--card-accent) 30%, transparent);
+  box-shadow:
+    inset 0 -2px 0 0 color-mix(in oklch, var(--card-accent) 30%, transparent);
+  grid-row: span 2;
+}
+
+.cultureName {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.cultureFact {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-ink-2);
+  margin: 0;
+  grid-column: 2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------------------
+ * Lessons · 7 small cards in a grid
+ * ------------------------------------------------------------------------- */
+
+.lessonGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@media (max-width: 1100px) {
+  .lessonGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .lessonGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.lessonCard {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--card-accent) 8%, var(--color-paper));
+  border: 1px solid color-mix(in oklch, var(--card-accent) 18%, transparent);
+  min-width: 0;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.lessonCard:hover {
+  background: color-mix(in oklch, var(--card-accent) 18%, var(--color-paper));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.lessonOrder {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  color: color-mix(in oklch, var(--card-accent) 80%, var(--color-ink));
+  font-weight: 600;
+}
+
+.lessonTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.lessonKeys {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  display: block;
+  padding-top: var(--space-2);
+  border-top: 1px solid color-mix(in oklch, var(--card-accent) 20%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+ * Games · 3 cards, each with a CSS mark
+ * ------------------------------------------------------------------------- */
+
+.gameGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 880px) {
+  .gameGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.gameCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--card-accent) 8%, var(--color-paper));
+  border: 1px solid color-mix(in oklch, var(--card-accent) 18%, transparent);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.gameCard:hover {
+  background: color-mix(in oklch, var(--card-accent) 16%, var(--color-paper));
+  border-color: color-mix(in oklch, var(--card-accent) 36%, transparent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.gameMark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--card-accent) 26%, var(--color-paper));
+  box-shadow:
+    inset 0 -2px 0 0 color-mix(in oklch, var(--card-accent) 50%, transparent),
+    0 2px 6px -3px color-mix(in oklch, var(--card-accent) 60%, transparent);
+  flex-shrink: 0;
+  grid-row: span 2;
+}
+
+/* Falling-words mark (3 short falling lines) */
+.gameMarkRain {
+  display: block;
+  width: 22px;
+  height: 22px;
+  position: relative;
+}
+
+.gameMarkRain > span {
+  position: absolute;
+  width: 14px;
+  height: 2px;
+  background: color-mix(in oklch, var(--card-accent) 80%, var(--color-ink));
+  border-radius: 2px;
+}
+
+.gameMarkRain > span:nth-child(1) { top: 2px;  left: 0; transform: rotate(20deg); }
+.gameMarkRain > span:nth-child(2) { top: 9px;  left: 4px; transform: rotate(15deg); }
+.gameMarkRain > span:nth-child(3) { top: 16px; left: 2px; transform: rotate(25deg); }
+
+/* Word-match mark (square + arrow + square) */
+.gameMarkMatch {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 3px;
+  width: 26px;
+  height: 22px;
+}
+
+.gameMarkMatchLeft,
+.gameMarkMatchRight {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--color-paper);
+  box-shadow:
+    0 0 0 1.5px color-mix(in oklch, var(--card-accent) 80%, transparent) inset;
+}
+
+.gameMarkMatchRight {
+  background: color-mix(in oklch, var(--card-accent) 60%, var(--color-paper));
+}
+
+.gameMarkMatchArrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: color-mix(in oklch, var(--card-accent) 80%, var(--color-ink));
+  line-height: 1;
+}
+
+/* Bolt mark (speed round) */
+.gameMarkBolt {
+  display: block;
+  width: 18px;
+  height: 26px;
+  background: color-mix(in oklch, var(--card-accent) 80%, var(--color-paper));
+  clip-path: polygon(
+    55% 0%,
+    0% 55%,
+    40% 55%,
+    30% 100%,
+    100% 38%,
+    55% 38%,
+    70% 0%
+  );
+}
+
+.gameTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.gameDesc {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-ink-2);
+  margin: 0;
+  grid-column: 2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------------------
+ * Speed test · one big card with tier strip + privacy note
+ * ------------------------------------------------------------------------- */
+
+.speedCard {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  border: 1px solid color-mix(in oklch, var(--color-ink) 8%, transparent);
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 720px) {
+  .speedCard {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.speedBody {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.speedDesc {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-ink-2);
+  margin: 0;
+  max-width: 52ch;
+}
+
+.privacyNote {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid color-mix(in oklch, var(--color-accent-2) 60%, transparent);
+  background: color-mix(in oklch, var(--color-accent-2) 8%, var(--color-paper));
+  border-radius: 0 var(--radius-input) var(--radius-input) 0;
+  max-width: 52ch;
+}
+
+.tierStrip {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.tierChip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper-2);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+  min-width: 180px;
+}
+
+.tierChip:nth-child(1) {
+  background: color-mix(in oklch, var(--color-accent) 24%, var(--color-paper));
+}
+.tierChip:nth-child(2) {
+  background: color-mix(in oklch, var(--color-accent-2) 24%, var(--color-paper));
+}
+.tierChip:nth-child(3) {
+  background: color-mix(in oklch, var(--color-accent-3) 22%, var(--color-paper));
+}
+.tierChip:nth-child(4) {
+  background: color-mix(in oklch, var(--color-mint) 30%, var(--color-paper));
+}
+
+.tierMark {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.tierLabel {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+ * Daily quests · 3 numbered rows
+ * ------------------------------------------------------------------------- */
+
+.questList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@media (max-width: 880px) {
+  .questList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.questCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--card-accent) 8%, var(--color-paper));
+  border: 1px solid color-mix(in oklch, var(--card-accent) 18%, transparent);
+  min-width: 0;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.questCard:hover {
+  background: color-mix(in oklch, var(--card-accent) 16%, var(--color-paper));
+  transform: translateY(-1px);
+}
+
+.questCode {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: color-mix(in oklch, var(--card-accent) 70%, var(--color-ink));
+  letter-spacing: 0.05em;
+}
+
+.questTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-ink);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------------------
+ * Mascots · 8 cells in a row
+ * ------------------------------------------------------------------------- */
+
+.mascotRow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@media (max-width: 1100px) {
+  .mascotRow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .mascotRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.mascotCell {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  border: 1px solid color-mix(in oklch, var(--color-ink) 6%, transparent);
+  min-width: 0;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.mascotCell:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.mascotCircle {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--color-accent) 22%, var(--color-paper));
+  box-shadow:
+    inset 0 -3px 0 0 color-mix(in oklch, var(--color-accent-deep) 40%, transparent);
+}
+
+.mascotImg {
+  width: 48px;
+  height: 48px;
+  display: block;
+  animation: mascot-bob 4s var(--ease-out) infinite;
+}
+
+.mascotCell:nth-child(2n) .mascotImg { animation-delay: -1s; }
+.mascotCell:nth-child(3n) .mascotImg { animation-delay: -2s; }
+.mascotCell:nth-child(5n) .mascotImg { animation-delay: -3s; }
+
+@keyframes mascot-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.mascotName {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------------------------
+ * CTA · push button
+ * ------------------------------------------------------------------------- */
+
+.ctaSection {
+  padding: clamp(3rem, 6vw, 5rem) var(--page-gutter) clamp(5rem, 10vw, 8rem);
+  max-width: var(--page-max);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-ink-on-accent);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
+  font-weight: 600;
+  text-decoration: none;
+  min-height: 56px;
+  box-shadow:
+    0 4px 0 0 var(--color-accent-deep),
+    0 8px 18px -4px color-mix(in oklch, var(--color-accent-deep) 50%, transparent);
+  transform: translateY(0);
+  transition:
+    transform 140ms var(--ease-out),
+    box-shadow 140ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 0 var(--color-accent-deep),
+    0 14px 24px -4px color-mix(in oklch, var(--color-accent-deep) 60%, transparent);
+}
+
+.ctaButton:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 0 var(--color-accent-deep),
+    0 2px 6px -2px color-mix(in oklch, var(--color-accent-deep) 40%, transparent);
+  transition-duration: 70ms;
+}
+
+.ctaButton:focus-visible {
+  outline: 3px solid color-mix(in oklch, var(--color-accent-deep) 70%, var(--color-focus));
+  outline-offset: 3px;
+}
+
+.ctaText {
+  display: inline-block;
+}
+
+.ctaArrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 1.1em;
+  transform: translateX(0);
+  transition: transform 200ms var(--ease-out);
+}
+
+.ctaButton:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+/* ---------------------------------------------------------------------------
+ * Ft5 Statement footer
+ * ------------------------------------------------------------------------- */
+
+.footer {
+  padding: clamp(4rem, 8vw, 6rem) var(--page-gutter) clamp(2rem, 4vw, 3rem);
+  max-width: var(--page-max);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  gap: var(--space-8);
+  border-top: 1px solid color-mix(in oklch, var(--color-ink) 12%, transparent);
+  padding-top: clamp(4rem, 8vw, 6rem);
+}
+
+.footerStatement {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 4.5vw, var(--text-4xl));
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin: 0;
+  max-width: 22ch;
+}
+
+.footerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3) var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid color-mix(in oklch, var(--color-ink) 10%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  font-weight: 500;
+}
+
+.footerWordmark {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.footerLink {
+  color: var(--color-ink-2);
+  text-decoration: none;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.footerLink:hover {
+  color: var(--color-ink);
+}
+
+.footerLink:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.footerCopy {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------------------
+ * Reduced motion
+ * ------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .navBrandMark,
+  .mascotImg {
+    animation: none;
+  }
+  .cultureCard,
+  .lessonCard,
+  .gameCard,
+  .questCard,
+  .mascotCell,
+  .ctaButton,
+  .navCta,
+  .ctaArrow,
+  .navLink,
+  .footerLink {
+    transition: none;
+  }
+  .cultureCard:hover,
+  .lessonCard:hover,
+  .gameCard:hover,
+  .questCard:hover,
+  .mascotCell:hover,
+  .ctaButton:hover,
+  .navCta:hover {
+    transform: none;
+  }
+}

@@ -30,6 +30,53 @@
     "teacher": "Guru",
     "language": "Bahasa"
   },
+  "landing": {
+    "nav": {
+      "howItWorks": "Cara kerja",
+      "privacy": "Privasi",
+      "open": "Buka Typify"
+    },
+    "hero": {
+      "line1": "Ketik.",
+      "line2": "Jelajah.",
+      "line3": "Coba lagi."
+    },
+    "lead": "Petualangan harian kecil dalam touch-typing. Belajar tombol lewat cerita budaya dari berbagai penjuru dunia.",
+    "cultures": {
+      "eyebrow": "Tiga budaya",
+      "title": "Jelajah dunia, satu ketukan pada satu waktu.",
+      "idName": "Indonesia",
+      "jaName": "Jepang",
+      "enName": "Inggris"
+    },
+    "lessons": {
+      "eyebrow": "Tujuh pelajaran",
+      "title": "Dari tombol dasar sampai shift dan simbol."
+    },
+    "games": {
+      "eyebrow": "Tiga permainan",
+      "title": "Latihan yang terasa seperti bermain.",
+      "fallingWordsDesc": "Kata-kata turun dari atas. Ketik sebelum menyentuh tanah.",
+      "wordPictureMatchDesc": "Pasangkan kata budaya dengan artinya. 'kopi' adalah kopi, 'neko' adalah kucing.",
+      "speedRoundDesc": "Semburan 30 detik. Kejar WPM terbaikmu."
+    },
+    "speed": {
+      "eyebrow": "Tes kecepatan",
+      "title": "30 detik. Satu rekor pribadi.",
+      "desc": "Ukur dirimu mengetik aliran kata. Naik tingkat leaderboard — Pemula, Cepat, Ahli, Master."
+    },
+    "quests": {
+      "eyebrow": "Tiga misi harian",
+      "title": "Suatu hal kecil yang dilakukan setiap hari, untuk waktu yang lama."
+    },
+    "mascots": {
+      "eyebrow": "Delapan teman",
+      "title": "Pilih teman mengetikmu."
+    },
+    "privacyNote": "Tanpa email, tanpa kata sandi. Progres tersimpan di perangkat ini, kecuali kamu gabung kelas.",
+    "cta": "Mulai pelajaran pertamamu",
+    "footerStatement": "Suatu hal kecil yang dilakukan setiap hari, untuk waktu yang lama."
+  },
   "onboarding": {
     "welcome": "Selamat datang di Typify",
     "languagePrompt": "Pilih bahasa",
@@ -128,7 +175,8 @@
     "playMinigame": "Main satu permainan budaya",
     "speedTest": "Coba tes kecepatan",
     "xp": "+{{count}} XP",
-    "stickerEarned": "Stiker baru untuk buku tempelmu"
+    "stickerEarned": "Stiker baru untuk buku tempelmu",
+    "tapToStart": "Pilih satu misi untuk mulai"
   },
   "privacy": {
     "title": "Privasi kamu",

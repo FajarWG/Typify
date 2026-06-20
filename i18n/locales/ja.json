@@ -30,6 +30,53 @@
     "teacher": "先生",
     "language": "言語"
   },
+  "landing": {
+    "nav": {
+      "howItWorks": "つかいかた",
+      "privacy": "プライバシー",
+      "open": "Typify を あける"
+    },
+    "hero": {
+      "line1": "うつ。",
+      "line2": "たびする。",
+      "line3": "もういちど。"
+    },
+    "lead": "タッチタイピングの、小さな まいにちのぼうけん。世界中 の 文化和ストーリー で キーを まなんでいくよ。",
+    "cultures": {
+      "eyebrow": "3つの文化",
+      "title": "キーを ひとつ うつごとに、世界を たびしよう。",
+      "idName": "インドネシア",
+      "jaName": "日本",
+      "enName": "イギリス"
+    },
+    "lessons": {
+      "eyebrow": "7つの レッスン",
+      "title": "ホーム row から シフト・記号 まで。"
+    },
+    "games": {
+      "eyebrow": "3つの ゲーム",
+      "title": "あそびのような れんしゅう。",
+      "fallingWordsDesc": "ことばが ふってくる。 じめんに つく まえに うたう。",
+      "wordPictureMatchDesc": "文化の ことばと いみを マッチ させる。 「kopi」は コーヒー、「neko」は ねこ。",
+      "speedRoundDesc": "30びょうの バースト。 じぶん の さいこう WPM を めざす。"
+    },
+    "speed": {
+      "eyebrow": "スピードテスト",
+      "title": "30びょう。 じぶん の きろく。",
+      "desc": "ことばの ながれを うって じかんを はかる。 ランキング の だんかいを のぼろう — ビギナー、はやい、达人、名手。"
+    },
+    "quests": {
+      "eyebrow": "3つの まいにちクエスト",
+      "title": "ちいさな ことを、まいにち。 ながく つづける もの。"
+    },
+    "mascots": {
+      "eyebrow": "8人の なかま",
+      "title": "タイピングの あいてを えらぼう。"
+    },
+    "privacyNote": "メールも パスワードも なし。 きろくは この デバイス に ある。 クラスに くわわった ときだけ、 せんせいと つながる。",
+    "cta": "さいしょの レッスンを はじめる",
+    "footerStatement": "ちいさな ことを、まいにち。 ながく つづける もの。"
+  },
   "onboarding": {
     "welcome": "Typify へようこそ",
     "languagePrompt": "言語をえらんでね",
@@ -128,7 +175,8 @@
     "playMinigame": "カルチャーゲームを 1つ あそぶ",
     "speedTest": "スピードテストに ちょうせん",
     "xp": "+{{count}} XP",
-    "stickerEarned": "スクラップブックに ステッカーをGET"
+    "stickerEarned": "スクラップブックに ステッカーをGET",
+    "tapToStart": "クエストを タップして はじめよう"
   },
   "privacy": {
     "title": "プライバシーについて",

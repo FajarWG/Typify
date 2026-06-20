@@ -3,7 +3,21 @@
   margin: 0 auto;
   padding: var(--space-10) var(--page-gutter) var(--space-16);
   display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+  align-items: start;
   gap: var(--space-10);
+}
+
+.main {
+  display: grid;
+  gap: var(--space-10);
+  min-width: 0;
+}
+
+@media (max-width: 960px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .hero {

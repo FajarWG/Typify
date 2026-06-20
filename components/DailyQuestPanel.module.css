@@ -1,0 +1,286 @@
+/* ---------------------------------------------------------------------------
+ * Daily Quest Panel · Hum theme
+ *
+ * Hum signature moves used here:
+ *   #2 multi-accent section bands  — each quest owns its own accent (pear /
+ *                                    cyan / coral), the three Hum accents
+ *                                    on stage together. The panel itself
+ *                                    sits on cream paper like every other
+ *                                    Hum surface.
+ *   #3 colour-shift card grid      — items carry a low-opacity tint of their
+ *                                    accent at rest; the tint deepens on
+ *                                    hover, then the card lifts and the
+ *                                    shadow brightens.
+ *   #4 streak / counter            — the `done` numeral is mono, tabular,
+ *                                    and weights 700. The number ticks up
+ *                                    via the TickUp component (parent).
+ *   #5 character mark              — the small pear circle at the top of
+ *                                    the header pulses gently at rest. No
+ *                                    img / no SVG — pure CSS.
+ *   #6 big rounded everything      — 20px cards, pill chip face, pill
+ *                                    progress dots. Shadows are layered
+ *                                    (contact + ambient), not single.
+ * ------------------------------------------------------------------------- */
+
+.panel {
+  position: sticky;
+  top: var(--space-6);
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+}
+
+/* Header — label + character + count --------------------------------------- */
+
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.character {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--color-accent) 22%, transparent),
+    0 2px 6px -2px color-mix(in oklch, var(--color-accent) 60%, transparent);
+  animation: char-pulse 4s var(--ease-out) infinite;
+  flex-shrink: 0;
+}
+
+@keyframes char-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 0 3px color-mix(in oklch, var(--color-accent) 22%, transparent),
+      0 2px 6px -2px color-mix(in oklch, var(--color-accent) 60%, transparent);
+  }
+  50% {
+    transform: scale(1.18);
+    box-shadow:
+      0 0 0 5px color-mix(in oklch, var(--color-accent) 32%, transparent),
+      0 4px 10px -2px color-mix(in oklch, var(--color-accent) 70%, transparent);
+  }
+}
+
+.count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.countNum {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.countDivider {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-ink-3);
+  padding: 0 2px;
+}
+
+.countTotal {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-ink-3);
+}
+
+/* Progress dots — three cells, one per quest, each lit with its own accent. */
+
+.dots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.dot {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper-2);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.dot[data-done="1"] {
+  background: var(--dot-accent);
+}
+
+/* Quest list — color-shift cards ------------------------------------------- */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.item {
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--item-accent) 6%, var(--color-paper));
+  border: 1px solid color-mix(in oklch, var(--item-accent) 14%, transparent);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.item:hover {
+  background: color-mix(in oklch, var(--item-accent) 14%, var(--color-paper));
+  border-color: color-mix(in oklch, var(--item-accent) 32%, transparent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.itemDone {
+  background: color-mix(in oklch, var(--item-accent) 18%, var(--color-paper));
+  border-color: color-mix(in oklch, var(--item-accent) 40%, transparent);
+}
+
+.itemDone:hover {
+  background: color-mix(in oklch, var(--item-accent) 26%, var(--color-paper));
+}
+
+.itemSatisfied {
+  /* Sits a touch lower when the day's done so the whole stack feels
+   * "settled" — the press metaphor on the whole panel. */
+  opacity: 0.92;
+}
+
+.itemLink {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  text-decoration: none;
+  color: var(--color-ink);
+  min-width: 0;
+}
+
+.itemLink:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.itemFace {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--item-accent) 22%, var(--color-paper));
+  box-shadow:
+    inset 0 -2px 0 0 color-mix(in oklch, var(--item-accent-deep) 50%, transparent),
+    0 2px 6px -3px color-mix(in oklch, var(--item-accent) 60%, transparent);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.itemFace[data-done="1"] {
+  background: var(--item-accent);
+  box-shadow:
+    inset 0 -2px 0 0 color-mix(in oklch, var(--item-accent-deep) 70%, transparent),
+    0 4px 10px -3px color-mix(in oklch, var(--item-accent) 70%, transparent);
+}
+
+.emoji {
+  font-size: 1.15rem;
+  line-height: 1;
+  display: block;
+}
+
+.itemBody {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+
+.itemMeta {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  line-height: var(--leading-snug);
+}
+
+.itemDone .itemTitle {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklch, var(--ink-mid, var(--color-ink-3)) 55%, transparent);
+  text-decoration-thickness: 1.5px;
+  color: var(--color-ink-2);
+}
+
+.itemStatus {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  color: var(--color-ink-3);
+  line-height: 1;
+  padding-inline: 2px;
+}
+
+.itemDone .itemStatus {
+  color: var(--item-accent-deep);
+  font-weight: 700;
+}
+
+/* Footer note — small encouragement, changes with state. */
+
+.note {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  text-align: center;
+  background: var(--color-paper-2);
+}
+
+.note[data-state="done"] {
+  background: color-mix(in oklch, var(--color-mint) 30%, var(--color-paper));
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+/* Reduced motion --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .character,
+  .dot,
+  .item,
+  .itemFace {
+    animation: none;
+    transition: none;
+  }
+  .item:hover {
+    transform: none;
+  }
+}

@@ -30,6 +30,53 @@
     "teacher": "Teacher",
     "language": "Language"
   },
+  "landing": {
+    "nav": {
+      "howItWorks": "How it works",
+      "privacy": "Privacy",
+      "open": "Open Typify"
+    },
+    "hero": {
+      "line1": "Type.",
+      "line2": "Travel.",
+      "line3": "Try again."
+    },
+    "lead": "A small daily adventure in touch-typing. Learn the keys through cultural stories from around the world.",
+    "cultures": {
+      "eyebrow": "Three cultures",
+      "title": "Travel the world, one keystroke at a time.",
+      "idName": "Indonesia",
+      "jaName": "Japan",
+      "enName": "United Kingdom"
+    },
+    "lessons": {
+      "eyebrow": "Seven lessons",
+      "title": "From home row to shift and symbols."
+    },
+    "games": {
+      "eyebrow": "Three games",
+      "title": "Practise that feels like playing.",
+      "fallingWordsDesc": "Words rain down. Type them before they touch the ground.",
+      "wordPictureMatchDesc": "Match a cultural word to its meaning. 'kopi' is coffee, 'neko' is cat.",
+      "speedRoundDesc": "A 30-second burst. Chase your best WPM."
+    },
+    "speed": {
+      "eyebrow": "Speed test",
+      "title": "30 seconds. One personal best.",
+      "desc": "Time yourself typing a stream of words. Climb the leaderboard tiers — Beginner, Fast, Expert, Master."
+    },
+    "quests": {
+      "eyebrow": "Three daily quests",
+      "title": "A small daily thing, kept for a long time."
+    },
+    "mascots": {
+      "eyebrow": "Eight companions",
+      "title": "Pick your typing buddy."
+    },
+    "privacyNote": "No email, no password. Progress lives on this device unless you join a class.",
+    "cta": "Start your first lesson",
+    "footerStatement": "A small daily thing, kept for a long time."
+  },
   "onboarding": {
     "welcome": "Welcome to Typify",
     "languagePrompt": "Pick your language",
@@ -128,7 +175,8 @@
     "playMinigame": "Play one cultural mini-game",
     "speedTest": "Try a speed test",
     "xp": "+{{count}} XP",
-    "stickerEarned": "New sticker for your scrapbook"
+    "stickerEarned": "New sticker for your scrapbook",
+    "tapToStart": "Tap a quest to start"
   },
   "privacy": {
     "title": "Your privacy",
