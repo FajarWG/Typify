@@ -1,0 +1,278 @@
+.shell {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-6) var(--page-gutter) var(--space-16);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backBtn {
+  background: transparent;
+  border: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-input);
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink-2);
+  cursor: pointer;
+}
+
+.backBtn:hover {
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+}
+
+.identityCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--color-accent) 24%, var(--color-paper));
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 540px) {
+  .identityCard {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+}
+
+.mascotTile {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-card);
+}
+
+.accessoryLayer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: end center;
+  pointer-events: none;
+  padding-bottom: var(--space-2);
+}
+
+.accessoryLayer img {
+  filter: drop-shadow(0 2px 0 color-mix(in oklch, var(--color-ink) 20%, transparent));
+}
+
+.identityBody {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.nickname {
+  font-family: var(--font-display);
+  font-size: var(--text-display-s);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+.mascotName {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.levelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.levelBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.xpTrack {
+  flex: 1;
+  min-width: 120px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--color-ink) 14%, transparent);
+  overflow: hidden;
+}
+
+.xpFill {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.xpValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-2);
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+  gap: var(--space-3);
+}
+
+.stat {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-ink) 8%, transparent);
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.section {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.sectionCount {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-3);
+  letter-spacing: 0.05em;
+}
+
+.accessoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-3);
+}
+
+.accessoryTile {
+  display: grid;
+  place-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-ink) 8%, transparent);
+  text-align: center;
+}
+
+.accessoryOwned {
+  background: color-mix(in oklch, var(--color-accent) 24%, var(--color-paper));
+}
+
+.accessoryLocked {
+  opacity: 0.55;
+}
+
+.accessoryName {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.accessoryLevel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  letter-spacing: var(--tracking-label);
+}
+
+.stickerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+
+.stickerTile {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-ink) 8%, transparent);
+  text-align: center;
+}
+
+.stickerOwned {
+  background: color-mix(in oklch, var(--color-mint) 24%, var(--color-paper));
+}
+
+.stickerLocked {
+  opacity: 0.5;
+}
+
+.lockedImg {
+  filter: grayscale(1) opacity(0.45);
+}
+
+.stickerName {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.stickerCondition {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+}
+
+.altLink {
+  font-family: var(--font-display);
+  color: var(--color-ink-2);
+  text-decoration: none;
+  align-self: start;
+}
+
+.altLink:hover {
+  color: var(--color-ink);
+}
