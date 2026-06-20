@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Panda mascot">
+  <circle cx="32" cy="34" r="22" fill="oklch(97% 0.012 95)"/>
+  <ellipse cx="20" cy="22" rx="6" ry="7" fill="oklch(20% 0.012 250)"/>
+  <ellipse cx="44" cy="22" rx="6" ry="7" fill="oklch(20% 0.012 250)"/>
+  <ellipse cx="24" cy="34" rx="5" ry="6" fill="oklch(20% 0.012 250)"/>
+  <ellipse cx="40" cy="34" rx="5" ry="6" fill="oklch(20% 0.012 250)"/>
+  <circle cx="24" cy="34" r="1.6" fill="oklch(97% 0.012 95)"/>
+  <circle cx="40" cy="34" r="1.6" fill="oklch(97% 0.012 95)"/>
+  <ellipse cx="32" cy="42" rx="3" ry="2" fill="oklch(20% 0.012 250)"/>
+  <path d="M28 48 Q32 51 36 48" stroke="oklch(20% 0.012 250)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+</svg>

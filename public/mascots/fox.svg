@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Fox mascot">
+  <polygon points="32,8 12,28 12,52 52,52 52,28" fill="oklch(68% 0.24 18)"/>
+  <polygon points="14,12 24,28 12,28" fill="oklch(68% 0.24 18)"/>
+  <polygon points="50,12 40,28 52,28" fill="oklch(68% 0.24 18)"/>
+  <path d="M12 52 L20 38 L44 38 L52 52 Z" fill="oklch(91% 0.020 95)"/>
+  <circle cx="24" cy="28" r="2.5" fill="oklch(20% 0.012 250)"/>
+  <circle cx="40" cy="28" r="2.5" fill="oklch(20% 0.012 250)"/>
+  <ellipse cx="32" cy="38" rx="3" ry="2" fill="oklch(20% 0.012 250)"/>
+  <path d="M32 40 L32 44" stroke="oklch(20% 0.012 250)" stroke-width="1.4" stroke-linecap="round"/>
+</svg>

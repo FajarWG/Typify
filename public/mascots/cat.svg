@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cat mascot">
+  <circle cx="32" cy="36" r="22" fill="oklch(86% 0.18 95)"/>
+  <polygon points="14,20 22,10 24,24" fill="oklch(86% 0.18 95)"/>
+  <polygon points="50,20 42,10 40,24" fill="oklch(86% 0.18 95)"/>
+  <circle cx="24" cy="36" r="3" fill="oklch(20% 0.012 250)"/>
+  <circle cx="40" cy="36" r="3" fill="oklch(20% 0.012 250)"/>
+  <path d="M30 42 Q32 45 34 42" stroke="oklch(20% 0.012 250)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M32 42 L32 44" stroke="oklch(20% 0.012 250)" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M14 38 L22 39 M14 41 L22 41 M50 38 L42 39 M50 41 L42 41" stroke="oklch(20% 0.012 250)" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+</svg>
