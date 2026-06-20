@@ -61,7 +61,10 @@ textarea {
   outline-offset: 2px;
 }
 
-/* Highlight band — used on em / .hl per Hum's section-alignment discipline. */
+/* Skip-link target: make <main id="main"> programmatically focusable */
+#main {
+  outline: none;
+}
 em,
 .hl {
   color: inherit;
