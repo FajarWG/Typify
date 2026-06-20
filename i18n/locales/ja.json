@@ -1,0 +1,132 @@
+{
+  "app": {
+    "name": "Typify",
+    "tagline": "打つ。旅する。もう一度。"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "continue": "続ける",
+    "back": "戻る",
+    "next": "次へ",
+    "skip": "あとで",
+    "reset": "リセット",
+    "ok": "OK",
+    "error": "うまくいきませんでした",
+    "loading": "読み込み中…",
+    "yes": "はい",
+    "no": "いいえ",
+    "tryAgain": "もう一度"
+  },
+  "nav": {
+    "home": "ホーム",
+    "lessons": "レッスン",
+    "games": "ミニゲーム",
+    "speedTest": "スピードテスト",
+    "leaderboard": "リーダーボード",
+    "quests": "今日のクエスト",
+    "profile": "プロフィール",
+    "settings": "せってい",
+    "teacher": "先生",
+    "language": "言語"
+  },
+  "onboarding": {
+    "welcome": "Typify へようこそ",
+    "languagePrompt": "言語をえらんでね",
+    "keyboardPrompt": "キーボードをえらんでね",
+    "trackPrompt": "学校で使う? じぶん で つかう?",
+    "trackClassroom": "学校で",
+    "trackIndependent": "じぶんで",
+    "classCodePrompt": "先生がくれたクラスコードを打ってね",
+    "classCodePlaceholder": "TYPF-0000",
+    "namePrompt": "なまえは?",
+    "namePlaceholder": "ニックネーム",
+    "mascotPrompt": "マスコットをえらんでね",
+    "warmupPrompt": "ウォームアップする?(30びょう)",
+    "warmupSkip": "あとで"
+  },
+  "lessons": {
+    "homeRow": "ホームポジション",
+    "topRow": "上の段",
+    "bottomRow": "下の段",
+    "allLetters": "すべての文字",
+    "shortSentences": "短い文",
+    "numbers": "数字",
+    "shiftSymbols": "シフトと記号",
+    "specialCharacters": "特殊文字",
+    "complete": "レッスン完了",
+    "locked": "まえのレッスンをクリアするとあけます",
+    "unlocked": "あけました",
+    "accuracyThreshold": "次の レッスン を あけるには 平均せいど 80% いじょう"
+  },
+  "mascot": {
+    "great": "いい タイピング!",
+    "keepGoing": "そのまま がんばって",
+    "almostThere": "もう ちょっと",
+    "newRecord": "しん きろく!",
+    "allDone": "おわり。また やる?",
+    "welcomeBack": "おかえり"
+  },
+  "settings": {
+    "title": "せってい",
+    "language": "アプリの言語",
+    "keyboard": "キーボード",
+    "culture": "ホーム カルチャー",
+    "sound": "おと",
+    "highContrast": "ハイコントラスト",
+    "dyslexiaFont": " dyslexiaに やさしい もじ",
+    "leaderboardOptIn": "リーダーボードに とうろくする",
+    "resetData": "データを けす",
+    "resetConfirmPrompt": "リセット と うって かくにん",
+    "resetWord": "リセット",
+    "resetDone": "おしまい。さいしょの がめんに もどします。"
+  },
+  "teacher": {
+    "loginPrompt": "先生のログイン",
+    "email": "メール",
+    "password": "パスワード",
+    "signIn": "ログイン",
+    "dashboard": "クラス ダッシュボード",
+    "createClass": "クラスをつくる",
+    "classCode": "クラスコード",
+    "exportSummary": "サマリーをダウンロード"
+  },
+  "keyboard": {
+    "qwerty": "QWERTY",
+    "romaji": "ローマ字"
+  },
+  "speedTest": {
+    "title": "スピードテスト",
+    "duration": "30びょう",
+    "start": "スタート",
+    "finish": "おわり",
+    "personalBest": "じぶん の きろく"
+  },
+  "games": {
+    "fallingWords": "おちてくる ことば",
+    "wordPictureMatch": "ことばとえを 合わせる",
+    "speedRound": "スピード あそび",
+    "celebrationTitle": "その ぶんか ぜんぶ たんけん したね!",
+    "celebrationFact": "なるほど"
+  },
+  "leaderboard": {
+    "tierPemula": "初心者",
+    "tierCepat": "中級",
+    "tierAhli": "上級",
+    "tierMaster": "達人",
+    "hidden": "リーダーボードは OFF",
+    "optIn": "せってい で ON に できるよ"
+  },
+  "quests": {
+    "title": "今日の クエスト",
+    "completeLesson": "レッスンを 1つ クリア",
+    "playMinigame": "カルチャーゲームを 1つ あそぶ",
+    "speedTest": "スピードテストに ちょうせん",
+    "xp": "+{{count}} XP",
+    "stickerEarned": "スクラップブックに ステッカーをGET"
+  },
+  "privacy": {
+    "title": "プライバシーについて",
+    "summary": "Typify はメールやパスワードをきかないよ。じぶんの きろくは この デバイスに あるから。先生から クラスコードを もらった ときだけ せんせいと つながるよ。"
+  }
+}

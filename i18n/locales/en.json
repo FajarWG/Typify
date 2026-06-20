@@ -1,0 +1,132 @@
+{
+  "app": {
+    "name": "Typify",
+    "tagline": "Type. Travel. Try again."
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "reset": "Reset",
+    "ok": "OK",
+    "error": "Something went wrong",
+    "loading": "Loading…",
+    "yes": "Yes",
+    "no": "No",
+    "tryAgain": "Try again"
+  },
+  "nav": {
+    "home": "Home",
+    "lessons": "Lessons",
+    "games": "Games",
+    "speedTest": "Speed test",
+    "leaderboard": "Leaderboard",
+    "quests": "Daily quests",
+    "profile": "Profile",
+    "settings": "Settings",
+    "teacher": "Teacher",
+    "language": "Language"
+  },
+  "onboarding": {
+    "welcome": "Welcome to Typify",
+    "languagePrompt": "Pick your language",
+    "keyboardPrompt": "Pick your keyboard",
+    "trackPrompt": "Are you at school, or practising on your own?",
+    "trackClassroom": "Classroom",
+    "trackIndependent": "On my own",
+    "classCodePrompt": "Type the class code from your teacher",
+    "classCodePlaceholder": "TYPF-0000",
+    "namePrompt": "What should we call you?",
+    "namePlaceholder": "Your nickname",
+    "mascotPrompt": "Pick a mascot",
+    "warmupPrompt": "Quick warm-up? (30 seconds)",
+    "warmupSkip": "Skip for now"
+  },
+  "lessons": {
+    "homeRow": "Home row",
+    "topRow": "Top row",
+    "bottomRow": "Bottom row",
+    "allLetters": "All letters",
+    "shortSentences": "Short sentences",
+    "numbers": "Numbers",
+    "shiftSymbols": "Shift and symbols",
+    "specialCharacters": "Special characters",
+    "complete": "Lesson complete",
+    "locked": "Locked — finish the previous lesson to unlock",
+    "unlocked": "Unlocked",
+    "accuracyThreshold": "Average accuracy above 80% to unlock the next lesson"
+  },
+  "mascot": {
+    "great": "Nice typing!",
+    "keepGoing": "Keep going",
+    "almostThere": "Almost there",
+    "newRecord": "New personal best!",
+    "allDone": "All done. Want another?",
+    "welcomeBack": "Welcome back"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Interface language",
+    "keyboard": "Keyboard layout",
+    "culture": "Home culture",
+    "sound": "Sound effects",
+    "highContrast": "High contrast",
+    "dyslexiaFont": "Dyslexia-friendly font",
+    "leaderboardOptIn": "Show me on the leaderboard",
+    "resetData": "Reset all my data",
+    "resetConfirmPrompt": "Type the word reset to confirm",
+    "resetWord": "reset",
+    "resetDone": "All set. Taking you back to the start."
+  },
+  "teacher": {
+    "loginPrompt": "Teacher sign in",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "dashboard": "Classroom dashboard",
+    "createClass": "Create a class",
+    "classCode": "Class code",
+    "exportSummary": "Export summary"
+  },
+  "keyboard": {
+    "qwerty": "QWERTY",
+    "romaji": "Romaji"
+  },
+  "speedTest": {
+    "title": "Speed test",
+    "duration": "30 seconds",
+    "start": "Start",
+    "finish": "Finish",
+    "personalBest": "Personal best"
+  },
+  "games": {
+    "fallingWords": "Falling words",
+    "wordPictureMatch": "Word to picture",
+    "speedRound": "Speed round",
+    "celebrationTitle": "You explored the whole culture!",
+    "celebrationFact": "Fun fact"
+  },
+  "leaderboard": {
+    "tierPemula": "Beginner",
+    "tierCepat": "Fast",
+    "tierAhli": "Expert",
+    "tierMaster": "Master",
+    "hidden": "Leaderboard is off",
+    "optIn": "Turn it on in Settings"
+  },
+  "quests": {
+    "title": "Daily quests",
+    "completeLesson": "Finish one lesson",
+    "playMinigame": "Play one cultural mini-game",
+    "speedTest": "Try a speed test",
+    "xp": "+{{count}} XP",
+    "stickerEarned": "New sticker for your scrapbook"
+  },
+  "privacy": {
+    "title": "Your privacy",
+    "summary": "Typify doesn't ask for your email or password. Your progress stays on this device unless your teacher gave you a class code."
+  }
+}

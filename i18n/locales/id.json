@@ -1,0 +1,132 @@
+{
+  "app": {
+    "name": "Typify",
+    "tagline": "Ketik. Jelajah. Coba lagi."
+  },
+  "common": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "continue": "Lanjut",
+    "back": "Kembali",
+    "next": "Berikutnya",
+    "skip": "Lewati",
+    "reset": "Atur ulang",
+    "ok": "Oke",
+    "error": "Ada yang tidak beres",
+    "loading": "Memuat…",
+    "yes": "Ya",
+    "no": "Tidak",
+    "tryAgain": "Coba lagi"
+  },
+  "nav": {
+    "home": "Beranda",
+    "lessons": "Pelajaran",
+    "games": "Permainan",
+    "speedTest": "Tes kecepatan",
+    "leaderboard": "Peringkat",
+    "quests": "Misi harian",
+    "profile": "Profil",
+    "settings": "Pengaturan",
+    "teacher": "Guru",
+    "language": "Bahasa"
+  },
+  "onboarding": {
+    "welcome": "Selamat datang di Typify",
+    "languagePrompt": "Pilih bahasa",
+    "keyboardPrompt": "Pilih papan ketik",
+    "trackPrompt": "Kamu belajar di sekolah, atau sendiri?",
+    "trackClassroom": "Sekolah",
+    "trackIndependent": "Sendiri",
+    "classCodePrompt": "Ketik kode kelas dari gurumu",
+    "classCodePlaceholder": "TYPF-0000",
+    "namePrompt": "Nama panggilanmu?",
+    "namePlaceholder": "Nama panggilan",
+    "mascotPrompt": "Pilih mascot",
+    "warmupPrompt": "Latihan singkat? (30 detik)",
+    "warmupSkip": "Lewati dulu"
+  },
+  "lessons": {
+    "homeRow": "Baris tengah",
+    "topRow": "Baris atas",
+    "bottomRow": "Baris bawah",
+    "allLetters": "Semua huruf",
+    "shortSentences": "Kalimat pendek",
+    "numbers": "Angka",
+    "shiftSymbols": "Shift dan simbol",
+    "specialCharacters": "Karakter khusus",
+    "complete": "Pelajaran selesai",
+    "locked": "Terkunci — selesaikan pelajaran sebelumnya dulu",
+    "unlocked": "Terbuka",
+    "accuracyThreshold": "Rata-rata akurasi di atas 80% untuk membuka pelajaran berikutnya"
+  },
+  "mascot": {
+    "great": "Mengetik yang bagus!",
+    "keepGoing": "Terus lanjut",
+    "almostThere": "Hampir sampai",
+    "newRecord": "Rekor baru!",
+    "allDone": "Selesai. Mau coba lagi?",
+    "welcomeBack": "Selamat datang kembali"
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Bahasa antarmuka",
+    "keyboard": "Layout papan ketik",
+    "culture": "Budaya utama",
+    "sound": "Efek suara",
+    "highContrast": "Kontras tinggi",
+    "dyslexiaFont": "Font ramah disleksia",
+    "leaderboardOptIn": "Tampilkan saya di peringkat",
+    "resetData": "Hapus semua data saya",
+    "resetConfirmPrompt": "Ketik kata reset untuk konfirmasi",
+    "resetWord": "reset",
+    "resetDone": "Beres. Membawa kamu kembali ke awal."
+  },
+  "teacher": {
+    "loginPrompt": "Masuk guru",
+    "email": "Email",
+    "password": "Kata sandi",
+    "signIn": "Masuk",
+    "dashboard": "Dasbor kelas",
+    "createClass": "Buat kelas",
+    "classCode": "Kode kelas",
+    "exportSummary": "Unduh ringkasan"
+  },
+  "keyboard": {
+    "qwerty": "QWERTY",
+    "romaji": "Romaji"
+  },
+  "speedTest": {
+    "title": "Tes kecepatan",
+    "duration": "30 detik",
+    "start": "Mulai",
+    "finish": "Selesai",
+    "personalBest": "Rekor pribadi"
+  },
+  "games": {
+    "fallingWords": "Kata berjatuhan",
+    "wordPictureMatch": "Kata ke gambar",
+    "speedRound": "Putaran cepat",
+    "celebrationTitle": "Kamu menjelajah satu budaya utuh!",
+    "celebrationFact": "Fakta menarik"
+  },
+  "leaderboard": {
+    "tierPemula": "Pemula",
+    "tierCepat": "Cepat",
+    "tierAhli": "Ahli",
+    "tierMaster": "Master",
+    "hidden": "Peringkat dimatikan",
+    "optIn": "Aktifkan di Pengaturan"
+  },
+  "quests": {
+    "title": "Misi harian",
+    "completeLesson": "Selesaikan satu pelajaran",
+    "playMinigame": "Main satu permainan budaya",
+    "speedTest": "Coba tes kecepatan",
+    "xp": "+{{count}} XP",
+    "stickerEarned": "Stiker baru untuk buku tempelmu"
+  },
+  "privacy": {
+    "title": "Privasi kamu",
+    "summary": "Typify tidak minta email atau kata sandi. Progresmu tersimpan di perangkat ini, kecuali guru memberikanmu kode kelas."
+  }
+}
