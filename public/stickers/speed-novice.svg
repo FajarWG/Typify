@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Speed tester sticker">
+  <circle cx="32" cy="32" r="28" fill="oklch(66% 0.18 235)"/>
+  <path d="M14 18 L26 46 L34 32 L42 46 L50 18" fill="none" stroke="oklch(97% 0.012 95)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
