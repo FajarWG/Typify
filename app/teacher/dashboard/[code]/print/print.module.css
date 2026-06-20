@@ -1,0 +1,176 @@
+.shell {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: var(--space-8) var(--page-gutter) var(--space-16);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-s);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  margin: var(--space-1) 0 0;
+}
+
+.sub {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  margin: var(--space-1) 0 0;
+}
+
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  cursor: pointer;
+  box-shadow:
+    0 4px 0 0 var(--color-accent-deep),
+    0 6px 12px -3px oklch(76% 0.2 95 / 0.45);
+}
+
+.printBtn:hover {
+  transform: translateY(-2px);
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: var(--space-3);
+}
+
+.stat {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--color-accent) 22%, var(--color-paper));
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.studentsSection,
+.aggregateSection {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-paper);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  border-bottom: 1px solid color-mix(in oklch, var(--color-ink) 8%, transparent);
+}
+
+.table th {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  background: var(--color-paper-2);
+  font-weight: 500;
+}
+
+.numCell {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.studentCell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+}
+
+.chartsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 720px) {
+  .chartsRow { grid-template-columns: 1fr; }
+}
+
+.chartCard {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-input);
+  background: var(--color-paper);
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-ink) 8%, transparent);
+}
+
+.chartLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+@media print {
+  .shell {
+    padding: 0;
+    background: white;
+  }
+  .printBtn { display: none; }
+  .table, .chartCard, .stat {
+    box-shadow: none;
+    border: 1px solid color-mix(in oklch, var(--color-ink) 12%, transparent);
+  }
+}

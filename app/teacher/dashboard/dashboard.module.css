@@ -1,0 +1,206 @@
+.shell {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-6) var(--page-gutter) var(--space-16);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.backLink {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink-2);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: var(--color-ink);
+}
+
+.logoutBtn {
+  background: transparent;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-input);
+}
+
+.logoutBtn:hover {
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+}
+
+.errorMsg {
+  font-family: var(--font-display);
+  color: var(--color-accent-3-deep);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-s);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+.createRow {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.createForm {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.createInput {
+  flex: 1 1 200px;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 2px solid color-mix(in oklch, var(--color-ink) 14%, transparent);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  min-width: 0;
+}
+
+.createInput:focus-visible {
+  outline: none;
+  border-color: var(--color-accent-2);
+}
+
+.createBtn {
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0.8rem 1.4rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  cursor: pointer;
+  box-shadow:
+    0 4px 0 0 var(--color-accent-deep),
+    0 6px 12px -3px oklch(76% 0.2 95 / 0.45);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.createBtn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 0 var(--color-accent-deep),
+    0 12px 22px -4px oklch(76% 0.2 95 / 0.45);
+}
+
+.createBtn:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 0 var(--color-accent-deep),
+    0 2px 6px -2px oklch(76% 0.2 95 / 0.45);
+}
+
+.empty {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  color: var(--color-ink-2);
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  background: var(--color-paper-2);
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-4);
+}
+
+.item {
+  display: block;
+}
+
+.card {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  text-decoration: none;
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  color: var(--color-ink);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.1em;
+  background: color-mix(in oklch, var(--color-accent) 70%, var(--color-paper));
+  color: var(--color-ink);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+}
+
+.cardCta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-accent-2-deep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .createBtn { transition: background-color var(--dur-base), box-shadow var(--dur-base); }
+  .card:hover, .createBtn:hover, .createBtn:active { transform: none; }
+}
