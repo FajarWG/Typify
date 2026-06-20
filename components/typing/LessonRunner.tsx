@@ -53,11 +53,13 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
   const [romajiState, setRomajiState] = useState<RomajiState>(() => createRomajiState());
   const [mistakeFlash, setMistakeFlash] = useState(false);
   const [mascotMood, setMascotMood] = useState<"rest" | "happy" | "oops">("rest");
+  const [keypop, setKeypop] = useState(false);
 
   const totalKeystrokesRef = useRef(0);
   const correctKeystrokesRef = useRef(0);
   const startTimeRef = useRef<number | null>(null);
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const keypopTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const mascot = profile ? findMascot(profile.mascot) : findMascot("cat");
 
@@ -132,6 +134,12 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
     }, 350);
   }, []);
 
+  const triggerKeypop = useCallback(() => {
+    setKeypop(true);
+    if (keypopTimerRef.current) clearTimeout(keypopTimerRef.current);
+    keypopTimerRef.current = setTimeout(() => setKeypop(false), 180);
+  }, []);
+
   const handleKey = useCallback(
     (event: KeyboardEvent) => {
       if (!phrase) return;
@@ -149,6 +157,7 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
         const result = evaluateLatinKeystroke(target, cursor, key);
         if (result.isCorrect) {
           correctKeystrokesRef.current += 1;
+          triggerKeypop();
           const newCursor = cursor + result.matched;
           setCursor(newCursor);
           if (newCursor >= target.length) {
@@ -161,6 +170,7 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
         const result = evaluateRomajiKeystroke(romajiState, key);
         if (result.isCorrect) {
           correctKeystrokesRef.current += 1;
+          if (result.committedKana !== "") triggerKeypop();
           setRomajiState(result.state);
           if (result.committedKana !== "") {
             const newCursor = cursor + [...result.committedKana].length;
@@ -174,7 +184,7 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
         }
       }
     },
-    [advancePhrase, culture, cursor, phrase, romajiState, target, triggerMistake],
+    [advancePhrase, culture, cursor, phrase, romajiState, target, triggerKeypop, triggerMistake],
   );
 
   useEffect(() => {
@@ -185,6 +195,7 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
   useEffect(() => {
     return () => {
       if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+      if (keypopTimerRef.current) clearTimeout(keypopTimerRef.current);
     };
   }, []);
 
@@ -225,7 +236,11 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
       </header>
 
       <section className={styles.stage}>
-        <div className={styles.mascotWrap} data-mood={mascotMood}>
+        <div
+          className={styles.mascotWrap}
+          data-mood={mascotMood}
+          data-keypop={keypop ? "1" : "0"}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={mascot.file} alt={mascot.alt} width={100} height={100} />
         </div>

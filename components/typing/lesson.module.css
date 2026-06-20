@@ -88,6 +88,16 @@
   transition: transform var(--dur-base) var(--ease-spring);
 }
 
+.mascotWrap[data-keypop="1"] {
+  animation: keypop 180ms var(--ease-out);
+}
+
+@keyframes keypop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
 .mascotWrap[data-mood="happy"] {
   transform: translateY(-6px) rotate(-2deg);
 }
@@ -106,6 +116,7 @@
 @media (prefers-reduced-motion: reduce) {
   .mascotWrap { transition: none; }
   .mascotWrap[data-mood="oops"] { animation: none; }
+  .mascotWrap[data-keypop="1"] { animation: none; }
 }
 
 .phrase {
