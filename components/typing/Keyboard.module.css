@@ -1,0 +1,99 @@
+.keyboard {
+  display: grid;
+  gap: 6px;
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--color-paper-2) 50%, var(--color-paper));
+  box-shadow: var(--shadow-card);
+  width: 100%;
+  max-width: 540px;
+  margin-inline: auto;
+}
+
+.row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.key {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  height: 38px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: var(--color-paper);
+  color: var(--color-ink-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-ink) 16%, transparent);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast),
+    color var(--dur-fast),
+    box-shadow var(--dur-fast) var(--ease-out);
+  flex: 1 1 0;
+  max-width: 48px;
+}
+
+.keyActive {
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow:
+    0 4px 0 0 var(--color-accent-deep),
+    0 6px 12px -3px oklch(76% 0.2 95 / 0.45);
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+.keyShift {
+  background: color-mix(in oklch, var(--color-accent-2) 25%, var(--color-paper));
+}
+
+.spaceRow {
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
+}
+
+.spaceKey {
+  display: grid;
+  place-items: center;
+  width: min(360px, 70%);
+  height: 38px;
+  border-radius: 8px;
+  background: var(--color-paper);
+  color: var(--color-ink-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-ink) 16%, transparent);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast),
+    color var(--dur-fast),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.spaceKeyActive {
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow:
+    0 4px 0 0 var(--color-accent-deep),
+    0 6px 12px -3px oklch(76% 0.2 95 / 0.45);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key,
+  .spaceKey {
+    transition: background-color var(--dur-fast), color var(--dur-fast);
+  }
+  .keyActive,
+  .spaceKeyActive {
+    transform: none;
+  }
+}
