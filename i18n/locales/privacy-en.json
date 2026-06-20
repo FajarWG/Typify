@@ -1,0 +1,22 @@
+{
+  "title": "Your privacy",
+  "lead": "Typify doesn't ask for your email or password. Your progress stays on this device unless your teacher gave you a class code.",
+  "sections": [
+    {
+      "h": "What we keep on your device",
+      "p": "Your nickname, your mascot, your typing scores, and your unlocked stickers. Nothing leaves the device unless you joined a classroom."
+    },
+    {
+      "h": "If you joined a classroom",
+      "p": "When your teacher gave you a class code, Typify sends your lesson scores and mini-game results to a small database so your teacher can see your progress. We do not send your real name, your email, or anything else."
+    },
+    {
+      "h": "Resetting your data",
+      "p": "Settings → Reset my data wipes everything on your device in one tap. If you joined a classroom, your teacher will see the new state from your next lesson."
+    },
+    {
+      "h": "Questions",
+      "p": "Ask a parent or teacher if anything here is unclear."
+    }
+  ]
+}

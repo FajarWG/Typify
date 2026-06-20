@@ -1,0 +1,22 @@
+{
+  "title": "Privasi kamu",
+  "lead": "Typify tidak minta email atau kata sandi. Progresmu tersimpan di perangkat ini, kecuali guru memberikanmu kode kelas.",
+  "sections": [
+    {
+      "h": "Apa yang tersimpan di perangkatmu",
+      "p": "Nama panggilan, mascot, skor mengetik, dan stiker yang sudah terbuka. Tidak ada yang keluar dari perangkat, kecuali kamu bergabung ke sebuah kelas."
+    },
+    {
+      "h": "Kalau kamu bergabung ke kelas",
+      "p": "Saat guru memberikan kode kelas, Typify mengirim skor pelajaran dan hasil permainanmu ke database kecil agar gurumu bisa melihat progresmu. Kami tidak mengirim nama asli, email, atau apa pun lainnya."
+    },
+    {
+      "h": "Mengatur ulang datamu",
+      "p": "Pengaturan → Hapus semua data saya akan menghapus semua yang ada di perangkatmu dalam satu ketukan. Kalau kamu di kelas, guru akan melihat kondisi barumu mulai pelajaran berikutnya."
+    },
+    {
+      "h": "Pertanyaan",
+      "p": "Tanya orang tua atau guru jika ada yang kurang jelas."
+    }
+  ]
+}
