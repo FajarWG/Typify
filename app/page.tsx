@@ -90,10 +90,20 @@ export default function HomePage() {
           <span className={styles.navCardTitle}>{t("nav.speedTest")}</span>
           <span className={styles.navCardDesc}>{t("speedTest.duration")}</span>
         </Link>
-        <Link href="/quests" className={styles.navCard} style={{ background: "color-mix(in oklch, var(--color-mint) 30%, var(--color-paper))" }}>
+        <Link href="/leaderboard" className={styles.navCard} style={{ background: "color-mix(in oklch, var(--color-mint) 30%, var(--color-paper))" }}>
           <span className="mono-label">04</span>
+          <span className={styles.navCardTitle}>{t("nav.leaderboard")}</span>
+          <span className={styles.navCardDesc}>{t("leaderboard.tierPemula")}</span>
+        </Link>
+        <Link href="/quests" className={styles.navCard} style={{ background: "color-mix(in oklch, var(--color-lavender) 26%, var(--color-paper))" }}>
+          <span className="mono-label">05</span>
           <span className={styles.navCardTitle}>{t("nav.quests")}</span>
           <span className={styles.navCardDesc}>{t("quests.completeLesson")}</span>
+        </Link>
+        <Link href="/settings" className={styles.navCard} style={{ background: "var(--color-paper-2)" }}>
+          <span className="mono-label">06</span>
+          <span className={styles.navCardTitle}>{t("nav.settings")}</span>
+          <span className={styles.navCardDesc}>{t("settings.language")}</span>
         </Link>
       </section>
     </main>
