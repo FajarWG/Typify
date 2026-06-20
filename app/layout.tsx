@@ -6,6 +6,8 @@ import "./globals.css";
 import { I18nProvider } from "@/components/I18nProvider";
 import { SettingsRoot } from "@/components/SettingsRoot";
 import { SkipLink } from "@/components/SkipLink";
+import { CelebrationOverlay } from "@/components/CelebrationOverlay";
+import { SyncLoopMount } from "@/components/SyncLoopMount";
 
 const display = Plus_Jakarta_Sans({
   variable: "--font-display",
@@ -36,6 +38,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SkipLink />
         <SettingsRoot />
+        <SyncLoopMount />
+        <CelebrationOverlay />
         <I18nProvider>
           <main id="main" className="flex-1">
             {children}
