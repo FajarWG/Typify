@@ -1,0 +1,170 @@
+// Typify · Prisma schema
+// SQLite in dev, designed to migrate cleanly to PostgreSQL or MySQL.
+// Run: bunx prisma migrate dev --name <change>
+// Client output lives in lib/generated/prisma (gitignored).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// -----------------------------------------------------------------------------
+// Auth · teachers only. Students never log in.
+// -----------------------------------------------------------------------------
+
+model Teacher {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  classrooms   Classroom[]
+
+  @@index([email])
+}
+
+// -----------------------------------------------------------------------------
+// Classroom · teacher-owned, addressed by a short kid-friendly code.
+// -----------------------------------------------------------------------------
+
+model Classroom {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  teacherId String
+  teacher   Teacher   @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  students  Student[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([code])
+  @@index([teacherId])
+}
+
+// -----------------------------------------------------------------------------
+// Student · anonymous, no PII. anonymousId is generated client-side (uuid v4)
+// the first time the app launches and is the key used for server sync.
+// classCode is nullable: independent-track students leave it null.
+// -----------------------------------------------------------------------------
+
+model Student {
+  id             String     @id @default(cuid())
+  anonymousId    String     @unique
+  nickname       String
+  mascot         String
+  primaryColor   String
+  homeCulture    String
+  uiLanguage     String
+  keyboardLayout String
+  level          Int        @default(1)
+  xp             Int        @default(0)
+
+  classCode      String?
+  classroom      Classroom? @relation(fields: [classCode], references: [code], onDelete: SetNull)
+
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  lastSeenAt     DateTime   @default(now())
+
+  progressLogs     ProgressLog[]
+  speedSessions    SpeedTestSession[]
+  questCompletions QuestCompletion[]
+  stickerUnlocks   StickerUnlock[]
+  accessoryUnlocks AccessoryUnlock[]
+
+  @@index([anonymousId])
+  @@index([classCode])
+  @@index([lastSeenAt])
+}
+
+// -----------------------------------------------------------------------------
+// ProgressLog · one row per completed lesson run. Append-only.
+// Charts on the teacher dashboard aggregate over these.
+// -----------------------------------------------------------------------------
+
+model ProgressLog {
+  id           String   @id @default(cuid())
+  studentId    String
+  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  lessonId     String
+  cultureId    String
+  wpm          Float
+  accuracy     Float
+  timeSpentSec Int
+  completedAt  DateTime @default(now())
+
+  @@index([studentId])
+  @@index([studentId, completedAt])
+  @@index([studentId, lessonId])
+}
+
+// -----------------------------------------------------------------------------
+// SpeedTestSession · standalone 30-second sprints.
+// Personal best is computed at query time (MAX(wpm) WHERE studentId = ?).
+// -----------------------------------------------------------------------------
+
+model SpeedTestSession {
+  id             String   @id @default(cuid())
+  studentId      String
+  student        Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  wpm            Float
+  accuracy       Float
+  durationSec    Int
+  cultureId      String?
+  completedAt    DateTime @default(now())
+
+  @@index([studentId])
+  @@index([studentId, wpm])
+  @@index([studentId, completedAt])
+}
+
+// -----------------------------------------------------------------------------
+// QuestCompletion · daily-quest semantics. localDate is YYYY-MM-DD in the
+// student's timezone, computed client-side, so a kid in Tokyo and a kid in
+// Berlin reset at their own midnight. The unique index prevents double-credit.
+// -----------------------------------------------------------------------------
+
+model QuestCompletion {
+  id          String   @id @default(cuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  questCode   String
+  localDate   String
+  completedAt DateTime @default(now())
+
+  @@unique([studentId, questCode, localDate])
+  @@index([studentId])
+  @@index([studentId, localDate])
+}
+
+// -----------------------------------------------------------------------------
+// Unlock records · stickers and accessories for the mascot scrapbook.
+// Unique on (studentId, key) so re-earning is idempotent.
+// -----------------------------------------------------------------------------
+
+model StickerUnlock {
+  id         String   @id @default(cuid())
+  studentId  String
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  stickerKey String
+  unlockedAt DateTime @default(now())
+
+  @@unique([studentId, stickerKey])
+  @@index([studentId])
+}
+
+model AccessoryUnlock {
+  id           String   @id @default(cuid())
+  studentId    String
+  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  accessoryKey String
+  unlockedAt   DateTime @default(now())
+
+  @@unique([studentId, accessoryKey])
+  @@index([studentId])
+}
