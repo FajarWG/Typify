@@ -83,13 +83,18 @@
   },
   "teacher": {
     "loginPrompt": "先生のログイン",
+    "signup": "先生のアカウントをつくる",
+    "name": "お名前",
     "email": "メール",
     "password": "パスワード",
     "signIn": "ログイン",
     "dashboard": "クラス ダッシュボード",
     "createClass": "クラスをつくる",
     "classCode": "クラスコード",
-    "exportSummary": "サマリーをダウンロード"
+    "exportSummary": "サマリーをダウンロード",
+    "noClasses": "まだクラスがありません。最初のクラスをつくりましょう。",
+    "noStudents": "まだこのクラスにいるがくせいはいません。",
+    "logout": "ログアウト"
   },
   "keyboard": {
     "qwerty": "QWERTY",

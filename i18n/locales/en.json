@@ -83,13 +83,18 @@
   },
   "teacher": {
     "loginPrompt": "Teacher sign in",
+    "signup": "Create teacher account",
+    "name": "Your name",
     "email": "Email",
     "password": "Password",
     "signIn": "Sign in",
     "dashboard": "Classroom dashboard",
     "createClass": "Create a class",
     "classCode": "Class code",
-    "exportSummary": "Export summary"
+    "exportSummary": "Export summary",
+    "noClasses": "No classes yet. Create your first one below.",
+    "noStudents": "No students have joined this class yet.",
+    "logout": "Sign out"
   },
   "keyboard": {
     "qwerty": "QWERTY",

@@ -83,13 +83,18 @@
   },
   "teacher": {
     "loginPrompt": "Masuk guru",
+    "signup": "Buat akun guru",
+    "name": "Nama kamu",
     "email": "Email",
     "password": "Kata sandi",
     "signIn": "Masuk",
     "dashboard": "Dasbor kelas",
     "createClass": "Buat kelas",
     "classCode": "Kode kelas",
-    "exportSummary": "Unduh ringkasan"
+    "exportSummary": "Unduh ringkasan",
+    "noClasses": "Belum ada kelas. Buat kelas pertamamu di bawah.",
+    "noStudents": "Belum ada siswa yang bergabung di kelas ini.",
+    "logout": "Keluar"
   },
   "keyboard": {
     "qwerty": "QWERTY",
