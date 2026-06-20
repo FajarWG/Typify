@@ -201,4 +201,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .charCurrent::after { animation: none; }
+  .statValue span[data-pulse="1"] { animation: none; }
+}
+
+/* TickUp pulse on counter completion (Hum signature #4) */
+.statValue span[data-pulse="1"] {
+  animation: tickpulse 240ms var(--ease-snap);
+  display: inline-block;
+}
+
+@keyframes tickpulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }

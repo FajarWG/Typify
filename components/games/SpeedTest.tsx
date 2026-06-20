@@ -14,6 +14,7 @@ import { getProfile, setSpeedTest, getSpeedTest } from "@/lib/storage";
 import { grantRewards } from "@/lib/rewards";
 import { XP_AWARDS } from "@/lib/progression";
 import { Keyboard } from "@/components/typing/Keyboard";
+import { TickUp } from "@/components/TickUp";
 import type { SpeedTestResult } from "@/types/localStorage";
 
 import styles from "./speed-test.module.css";
@@ -209,8 +210,8 @@ export function SpeedTest({ onFinish, showHeader = true, finishHref }: SpeedTest
       {running && (
         <>
           <div className={styles.statsRow}>
-            <Stat label="WPM" value={liveStats.wpm.toFixed(1)} />
-            <Stat label="ACC" value={`${Math.round(liveStats.accuracy * 100)}%`} />
+            <Stat label="WPM" value={<TickUp value={liveStats.wpm} precision={1} ariaLabel={`${liveStats.wpm.toFixed(1)} words per minute`} />} />
+            <Stat label="ACC" value={<TickUp value={Math.round(liveStats.accuracy * 100)} precision={0} ariaLabel={`${Math.round(liveStats.accuracy * 100)} percent accuracy`} />} />
             <Stat label={t("speedTest.duration").slice(0, 4)} value={`${TOTAL_DURATION_SEC - liveElapsed}s`} />
           </div>
           <div className={styles.stage}>
@@ -242,7 +243,7 @@ export function SpeedTest({ onFinish, showHeader = true, finishHref }: SpeedTest
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className={styles.stat}>
       <span className={styles.statLabel}>{label}</span>
