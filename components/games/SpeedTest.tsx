@@ -11,6 +11,8 @@ import {
 } from "@/lib/typing/engine";
 import { findLesson, lessonTrack } from "@/content/lessons";
 import { getProfile, setSpeedTest, getSpeedTest } from "@/lib/storage";
+import { grantRewards } from "@/lib/rewards";
+import { XP_AWARDS } from "@/lib/progression";
 import { Keyboard } from "@/components/typing/Keyboard";
 import type { SpeedTestResult } from "@/types/localStorage";
 
@@ -99,6 +101,10 @@ export function SpeedTest({ onFinish, showHeader = true, finishHref }: SpeedTest
       ...existing,
       personalBest: personalBest ? result : existing.personalBest,
       recent: [result, ...existing.recent].slice(0, 10),
+    });
+    grantRewards({
+      xp: XP_AWARDS.speedTestComplete,
+      questCode: "speed-test",
     });
     setFinished(true);
     setRunning(false);

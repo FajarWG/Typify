@@ -8,6 +8,8 @@ import { FallingWordsGame } from "@/components/games/FallingWordsGame";
 import { WordMatchGame } from "@/components/games/WordMatchGame";
 import { SpeedTest } from "@/components/games/SpeedTest";
 import { setQuests, getQuests } from "@/lib/storage";
+import { grantRewards } from "@/lib/rewards";
+import { XP_AWARDS } from "@/lib/progression";
 import type { QuestCode, QuestState } from "@/types/localStorage";
 
 import styles from "./game.module.css";
@@ -19,11 +21,20 @@ interface GameFinish {
   total?: number;
 }
 
+function grantGameRewards(gameId: string, finish: GameFinish): void {
+  const xp = Math.round((finish.accuracy ?? 0) * XP_AWARDS.miniGameComplete);
+  grantRewards({
+    xp,
+    questCode: gameId === "speed-round" ? "speed-test" : "play-minigame",
+  });
+}
+
 export default function GamePage() {
   const params = useParams<{ gameId: string }>();
   const router = useRouter();
   const { t } = useTranslation();
   const [done, setDone] = useState<GameFinish | null>(null);
+  const [granted, setGranted] = useState<string | null>(null);
 
   useEffect(() => {
     // Mark "play-minigame" quest for today (idempotent)
@@ -70,6 +81,15 @@ export default function GamePage() {
       }
     }
   }, [params.gameId]);
+
+  function handleFinish(finish: GameFinish): void {
+    setDone(finish);
+    const key = `${params.gameId}:${Date.now()}`;
+    if (granted !== key) {
+      grantGameRewards(params.gameId ?? "", finish);
+      setGranted(key);
+    }
+  }
 
   if (!params.gameId) return null;
 
@@ -132,7 +152,7 @@ export default function GamePage() {
         >
           ← {t("common.back")}
         </button>
-        <FallingWordsGame onFinish={(s) => setDone(s)} />
+        <FallingWordsGame onFinish={handleFinish} />
       </main>
     );
   }
@@ -146,7 +166,7 @@ export default function GamePage() {
         >
           ← {t("common.back")}
         </button>
-        <WordMatchGame onFinish={(s) => setDone(s)} />
+        <WordMatchGame onFinish={handleFinish} />
       </main>
     );
   }
@@ -160,9 +180,7 @@ export default function GamePage() {
         >
           ← {t("common.back")}
         </button>
-        <SpeedTest
-          onFinish={(s) => setDone({ accuracy: s.accuracy, wpm: s.wpm })}
-        />
+        <SpeedTest onFinish={handleFinish} />
       </main>
     );
   }

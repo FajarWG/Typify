@@ -19,15 +19,10 @@ import { Keyboard } from "@/components/typing/Keyboard";
 import {
   getProgress,
   getProfile,
-  getQuests,
   setProgress,
-  setQuests,
 } from "@/lib/storage";
-import type {
-  ProgressState,
-  QuestCode,
-  QuestState,
-} from "@/types/localStorage";
+import { grantRewards, lessonXp } from "@/lib/rewards";
+import type { ProgressState } from "@/types/localStorage";
 
 import styles from "./lesson.module.css";
 
@@ -108,25 +103,10 @@ export function LessonRunner({ lessonId }: LessonRunnerProps) {
       };
       setProgress(nextProgress);
 
-      const today = new Date().toISOString().slice(0, 10);
-      const quests = getQuests();
-      const alreadyDone = quests.completed.some(
-        (q) => q.questCode === "complete-lesson" && q.localDate === today,
-      );
-      if (!alreadyDone) {
-        const updatedQuests: QuestState = {
-          ...quests,
-          completed: [
-            ...quests.completed,
-            {
-              questCode: "complete-lesson" as QuestCode,
-              localDate: today,
-              completedAt: new Date().toISOString(),
-            },
-          ],
-        };
-        setQuests(updatedQuests);
-      }
+      grantRewards({
+        xp: lessonXp(stats.accuracy),
+        questCode: "complete-lesson",
+      });
 
       if (typeof window !== "undefined") {
         window.dispatchEvent(new CustomEvent("typify:progress-updated"));
