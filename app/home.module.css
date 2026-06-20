@@ -1,0 +1,122 @@
+.shell {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-10) var(--page-gutter) var(--space-16);
+  display: grid;
+  gap: var(--space-10);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--color-accent) 24%, var(--color-paper));
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+}
+
+.mascotCard {
+  width: 160px;
+  height: 160px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-card);
+}
+
+.mascotImg {
+  width: 110px;
+  height: 110px;
+  animation: bob 4s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascotImg { animation: none; }
+}
+
+.heroText {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display-s);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+}
+
+.hl {
+  font-style: normal;
+}
+
+.heroLead {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-ink-2);
+  margin: 0;
+}
+
+.navGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-4);
+}
+
+.navCard {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  text-decoration: none;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.navCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.navCard:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.navCardTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+}
+
+.navCardDesc {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+}
