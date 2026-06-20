@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import "@fontsource/opendyslexic/400.css";
+import "@fontsource/opendyslexic/700.css";
 import "./globals.css";
 import { I18nProvider } from "@/components/I18nProvider";
+import { SettingsRoot } from "@/components/SettingsRoot";
+import { SkipLink } from "@/components/SkipLink";
 
 const display = Plus_Jakarta_Sans({
   variable: "--font-display",
@@ -30,7 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${mono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <I18nProvider>{children}</I18nProvider>
+        <SkipLink />
+        <SettingsRoot />
+        <I18nProvider>
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+        </I18nProvider>
       </body>
     </html>
   );

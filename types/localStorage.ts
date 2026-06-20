@@ -186,6 +186,8 @@ export interface SettingsState {
   highContrast: boolean;
   dyslexiaFont: boolean;
   classroomOptIn: boolean;
+  keyboardLayout: KeyboardLayout;
+  homeCulture: CultureCode;
 }
 
 export function createDefaultSettings(): SettingsState {
@@ -196,6 +198,8 @@ export function createDefaultSettings(): SettingsState {
     highContrast: false,
     dyslexiaFont: false,
     classroomOptIn: false,
+    keyboardLayout: "qwerty",
+    homeCulture: "id",
   };
 }
 
